@@ -28,7 +28,8 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "he_IL",
-    siteName: "השוואת מחירים",
+    siteName: "השווה לי",
+    images: ["/logo.png"],
   },
   robots: { index: true, follow: true },
 };

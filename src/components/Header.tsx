@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { SITE_NAME, CATEGORIES } from "@/lib/config";
+import Image from "next/image";
+import { CATEGORIES } from "@/lib/config";
 import CategoryDropdown from "./CategoryDropdown";
 
 const HEADER_CATS = [
@@ -27,11 +28,15 @@ export default function Header() {
             אודות
           </Link>
 
-          <Link href="/" className="flex items-center gap-2 group">
-            <span className="text-2xl">💰</span>
-            <span className="text-xl font-bold text-slate-900 group-hover:text-blue-600">
-              {SITE_NAME}
-            </span>
+          <Link href="/" className="flex items-center group" aria-label="השווה לי">
+            <Image
+              src="/logo.png"
+              alt="השווה לי"
+              width={140}
+              height={40}
+              priority
+              className="h-9 md:h-10 w-auto"
+            />
           </Link>
 
           {/* אודות במובייל - בפינה ימנית מוחלטת */}

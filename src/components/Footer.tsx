@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { SITE_NAME } from "@/lib/config";
 
 export default function Footer() {
@@ -9,7 +10,13 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 py-10">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           <div>
-            <h3 className="font-bold text-slate-900 mb-3">{SITE_NAME}</h3>
+            <Image
+              src="/logo.png"
+              alt={SITE_NAME}
+              width={140}
+              height={40}
+              className="h-10 w-auto mb-3"
+            />
             <p className="text-sm text-slate-600">
               משווה המחירים המוביל בישראל - השוואה בין KSP, אמזון, אליאקספרס ושיין.
             </p>
