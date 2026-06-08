@@ -1,9 +1,14 @@
 import type { Metadata } from "next";
 import { Heebo } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { SITE_URL } from "@/lib/config";
+
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 
 const heebo = Heebo({
   variable: "--font-heebo",
@@ -39,6 +44,9 @@ export default function RootLayout({
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
+        <Analytics />
+        <SpeedInsights />
+        {GA_ID && <GoogleAnalytics gaId={GA_ID} />}
       </body>
     </html>
   );
