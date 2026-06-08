@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { SITE_URL, CATEGORIES } from "@/lib/config";
-import { MOCK_PRODUCTS } from "@/lib/mock-data";
+import { getAllProducts } from "@/lib/mock-data";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
@@ -22,7 +22,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  const productUrls: MetadataRoute.Sitemap = MOCK_PRODUCTS.map((p) => ({
+  const productUrls: MetadataRoute.Sitemap = getAllProducts().map((p) => ({
     url: `${SITE_URL}/product/${p.slug}`,
     lastModified: new Date(p.createdAt),
     changeFrequency: "weekly" as const,

@@ -1,5 +1,6 @@
 import type { Product } from "./types";
 import { KSP_AFFILIATE_ID } from "./config";
+import { GENERATED_PRODUCTS } from "./generated-products";
 
 const kspLink = (sku: string) => `https://ksp.co.il/item/${KSP_AFFILIATE_ID}/${sku}`;
 const aliLink = (id: string) =>
@@ -932,14 +933,17 @@ export const MOCK_PRODUCTS: Product[] = [
   },
 ];
 
+// Real products (from AliExpress API) + curated mock products (with KSP/Amazon)
+const ALL_PRODUCTS: Product[] = [...MOCK_PRODUCTS, ...GENERATED_PRODUCTS];
+
 export function getProductBySlug(slug: string): Product | undefined {
-  return MOCK_PRODUCTS.find((p) => p.slug === slug);
+  return ALL_PRODUCTS.find((p) => p.slug === slug);
 }
 
 export function getProductsByCategory(category: string): Product[] {
-  return MOCK_PRODUCTS.filter((p) => p.category === category);
+  return ALL_PRODUCTS.filter((p) => p.category === category);
 }
 
 export function getAllProducts(): Product[] {
-  return MOCK_PRODUCTS;
+  return ALL_PRODUCTS;
 }

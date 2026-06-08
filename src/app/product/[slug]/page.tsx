@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { getProductBySlug, getProductsByCategory, MOCK_PRODUCTS } from "@/lib/mock-data";
+import { getProductBySlug, getProductsByCategory, getAllProducts } from "@/lib/mock-data";
 import { CATEGORIES, VENDORS } from "@/lib/config";
 import { formatPrice } from "@/lib/format";
 import PriceComparisonTable from "@/components/PriceComparisonTable";
@@ -12,7 +12,7 @@ interface PageProps {
 }
 
 export async function generateStaticParams() {
-  return MOCK_PRODUCTS.map((p) => ({ slug: p.slug }));
+  return getAllProducts().map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
