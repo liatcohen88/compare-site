@@ -1,19 +1,18 @@
 import { NextRequest, NextResponse } from "next/server";
-import { auth } from "@/auth";
+import { SESSION_COOKIE, verifySessionToken } from "@/lib/admin-auth";
 
-export default auth(async (req) => {
+export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
-
   if (!pathname.startsWith("/admin")) return NextResponse.next();
   if (pathname === "/admin/login") return NextResponse.next();
-  if (pathname.startsWith("/api/auth")) return NextResponse.next();
 
-  if (req.auth) return NextResponse.next();
+  const token = req.cookies.get(SESSION_COOKIE)?.value;
+  if (verifySessionToken(token)) return NextResponse.next();
 
   const loginUrl = new URL("/admin/login", req.url);
-  loginUrl.searchParams.set("callbackUrl", pathname);
+  loginUrl.searchParams.set("redirect", pathname);
   return NextResponse.redirect(loginUrl);
-});
+}
 
 export const config = {
   matcher: ["/admin/:path*"],

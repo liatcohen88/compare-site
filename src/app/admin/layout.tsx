@@ -1,6 +1,5 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { signOut, auth } from "@/auth";
 
 export const metadata: Metadata = {
   title: "ניהול",
@@ -8,27 +7,20 @@ export const metadata: Metadata = {
 };
 
 const NAV = [
-  { href: "/admin", label: "📊 דשבורד", icon: "📊" },
-  { href: "/admin/stats", label: "📈 סטטיסטיקה", icon: "📈" },
-  { href: "/admin/products", label: "📦 מוצרים", icon: "📦" },
-  { href: "/admin/content", label: "✏️ עריכת תוכן", icon: "✏️" },
-  { href: "/admin/branding", label: "🎨 לוגו ועיצוב", icon: "🎨" },
-  { href: "/admin/affiliate", label: "💰 אפיליאטים", icon: "💰" },
-  { href: "/admin/seo", label: "🔍 SEO", icon: "🔍" },
+  { href: "/admin", label: "📊 דשבורד" },
+  { href: "/admin/stats", label: "📈 סטטיסטיקה" },
+  { href: "/admin/products", label: "📦 מוצרים" },
+  { href: "/admin/content", label: "✏️ עריכת תוכן" },
+  { href: "/admin/branding", label: "🎨 לוגו ועיצוב" },
+  { href: "/admin/affiliate", label: "💰 אפיליאטים" },
+  { href: "/admin/seo", label: "🔍 SEO" },
 ];
 
-export default async function AdminLayout({
+export default function AdminLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const session = await auth();
-
-  async function signOutAction() {
-    "use server";
-    await signOut({ redirectTo: "/admin/login" });
-  }
-
   return (
     <div className="min-h-screen bg-slate-50">
       <div className="bg-slate-900 text-white">
@@ -37,9 +29,7 @@ export default async function AdminLayout({
             <span className="text-2xl">⚙️</span>
             <div>
               <div className="font-bold">פאנל ניהול - השווה לי</div>
-              <div className="text-xs text-slate-400">
-                {session?.user?.email ?? "מצב מנהל"}
-              </div>
+              <div className="text-xs text-slate-400">מצב מנהל</div>
             </div>
           </div>
           <div className="flex items-center gap-3">
@@ -50,16 +40,14 @@ export default async function AdminLayout({
             >
               ↗ פתח אתר
             </Link>
-            {session && (
-              <form action={signOutAction}>
-                <button
-                  type="submit"
-                  className="text-sm bg-red-500 hover:bg-red-600 px-3 py-1.5 rounded-lg"
-                >
-                  התנתקות
-                </button>
-              </form>
-            )}
+            <form action="/api/admin/logout" method="POST">
+              <button
+                type="submit"
+                className="text-sm bg-red-500 hover:bg-red-600 px-3 py-1.5 rounded-lg"
+              >
+                התנתקות
+              </button>
+            </form>
           </div>
         </div>
       </div>
