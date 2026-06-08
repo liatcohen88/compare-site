@@ -14,8 +14,8 @@ const heebo = Heebo({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "השוואת מחירים - מצא את המחיר הזול ביותר בישראל",
-    template: "%s | השוואת מחירים",
+    default: "השווה לי - השוואת מחירים בין KSP, אמזון, אליאקספרס ושיין",
+    template: "%s | השווה לי",
   },
   description:
     "השוואת מחירים בין KSP, אמזון, אליאקספרס ושיין. גלה את המחיר הזול ביותר על אלקטרוניקה, גאדג'טים, סמארטפונים ועוד.",

@@ -18,22 +18,22 @@ export default function ContactPage() {
       <div className="bg-blue-50 border border-blue-200 rounded-xl p-6 space-y-4">
         <div>
           <h2 className="font-bold text-slate-900 mb-1">📧 אימייל כללי</h2>
-          <a href="mailto:info@compare-site.local" className="text-blue-600 hover:underline">
-            info@compare-site.local
+          <a href="mailto:info@hashveli.co.il" className="text-blue-600 hover:underline">
+            info@hashveli.co.il
           </a>
         </div>
 
         <div>
           <h2 className="font-bold text-slate-900 mb-1">🐛 דיווח על תקלה / מחיר שגוי</h2>
-          <a href="mailto:bugs@compare-site.local" className="text-blue-600 hover:underline">
-            bugs@compare-site.local
+          <a href="mailto:bugs@hashveli.co.il" className="text-blue-600 hover:underline">
+            bugs@hashveli.co.il
           </a>
         </div>
 
         <div>
           <h2 className="font-bold text-slate-900 mb-1">🤝 שותפויות / פרסום</h2>
-          <a href="mailto:partners@compare-site.local" className="text-blue-600 hover:underline">
-            partners@compare-site.local
+          <a href="mailto:partners@hashveli.co.il" className="text-blue-600 hover:underline">
+            partners@hashveli.co.il
           </a>
         </div>
       </div>

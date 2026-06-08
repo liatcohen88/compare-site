@@ -1,6 +1,6 @@
-export const SITE_NAME = "השוואת מחירים";
+export const SITE_NAME = "השווה לי";
 export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://compare-site.local";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://hashveli.co.il";
 
 export const KSP_AFFILIATE_ID = process.env.KSP_AFFILIATE_ID ?? "F15240AX";
 
