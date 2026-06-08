@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Product } from "@/lib/types";
 import { formatPrice } from "@/lib/format";
 import { VENDORS } from "@/lib/config";
+import ProductImage from "./ProductImage";
 
 interface Props {
   product: Product;
@@ -29,10 +30,10 @@ export default function ProductCard({ product }: Props) {
       className="group bg-white border border-slate-200 rounded-xl overflow-hidden hover:shadow-lg hover:border-blue-300 transition-all"
     >
       <div className="aspect-square bg-slate-50 relative overflow-hidden">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <ProductImage
           src={product.imageUrl}
           alt={product.title}
+          category={product.category}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
         />
         {savingsPercent >= 10 && (

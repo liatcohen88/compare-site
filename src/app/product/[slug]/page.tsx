@@ -6,6 +6,7 @@ import { CATEGORIES, VENDORS } from "@/lib/config";
 import { formatPrice } from "@/lib/format";
 import PriceComparisonTable from "@/components/PriceComparisonTable";
 import ProductCard from "@/components/ProductCard";
+import ProductImage from "@/components/ProductImage";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -100,11 +101,11 @@ export default async function ProductPage({ params }: PageProps) {
         </nav>
 
         <div className="grid md:grid-cols-2 gap-8 mb-12">
-          <div className="bg-slate-50 rounded-2xl p-8 flex items-center justify-center">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+          <div className="bg-slate-50 rounded-2xl p-8 flex items-center justify-center min-h-[24rem]">
+            <ProductImage
               src={product.imageUrl}
               alt={product.title}
+              category={product.category}
               className="max-w-full max-h-96 object-contain"
             />
           </div>
