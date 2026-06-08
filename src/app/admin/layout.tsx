@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { signOut, auth } from "@/auth";
 
 export const metadata: Metadata = {
   title: "ניהול",
@@ -16,11 +17,18 @@ const NAV = [
   { href: "/admin/seo", label: "🔍 SEO", icon: "🔍" },
 ];
 
-export default function AdminLayout({
+export default async function AdminLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const session = await auth();
+
+  async function signOutAction() {
+    "use server";
+    await signOut({ redirectTo: "/admin/login" });
+  }
+
   return (
     <div className="min-h-screen bg-slate-50">
       <div className="bg-slate-900 text-white">
@@ -29,7 +37,9 @@ export default function AdminLayout({
             <span className="text-2xl">⚙️</span>
             <div>
               <div className="font-bold">פאנל ניהול - השווה לי</div>
-              <div className="text-xs text-slate-400">מצב מנהל</div>
+              <div className="text-xs text-slate-400">
+                {session?.user?.email ?? "מצב מנהל"}
+              </div>
             </div>
           </div>
           <div className="flex items-center gap-3">
@@ -40,14 +50,16 @@ export default function AdminLayout({
             >
               ↗ פתח אתר
             </Link>
-            <form action="/api/admin/logout" method="POST">
-              <button
-                type="submit"
-                className="text-sm bg-red-500 hover:bg-red-600 px-3 py-1.5 rounded-lg"
-              >
-                התנתקות
-              </button>
-            </form>
+            {session && (
+              <form action={signOutAction}>
+                <button
+                  type="submit"
+                  className="text-sm bg-red-500 hover:bg-red-600 px-3 py-1.5 rounded-lg"
+                >
+                  התנתקות
+                </button>
+              </form>
+            )}
           </div>
         </div>
       </div>
