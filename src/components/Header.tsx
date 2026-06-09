@@ -23,7 +23,7 @@ export default function Header() {
     <header className="border-b border-slate-200 bg-white sticky top-0 z-50 shadow-sm">
       <div className="max-w-7xl mx-auto px-4">
         {/* שורה עליונה - מובייל: לוגו במרכז + אודות בצד */}
-        <div className="flex items-center justify-center md:justify-between h-20 md:h-24 relative">
+        <div className="flex items-center justify-center md:justify-between h-24 md:h-28 relative">
           <Link href="/about" className="hidden md:block text-sm text-slate-600 hover:text-blue-600 shrink-0 order-3">
             אודות
           </Link>
@@ -32,10 +32,10 @@ export default function Header() {
             <Image
               src="/logo.png"
               alt="השווה לי"
-              width={280}
-              height={80}
+              width={400}
+              height={120}
               priority
-              className="h-14 md:h-16 w-auto"
+              className="h-20 md:h-24 w-auto"
             />
           </Link>
 
