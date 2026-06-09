@@ -7,6 +7,7 @@ interface Props {
   alt: string;
   className?: string;
   category?: string;
+  slug?: string;
 }
 
 const CATEGORY_PLACEHOLDERS: Record<string, string> = {
@@ -49,28 +50,58 @@ const CATEGORY_PLACEHOLDERS: Record<string, string> = {
   office: "📎",
 };
 
-export default function ProductImage({ src, alt, className, category }: Props) {
-  const [hasError, setHasError] = useState(!src || src === "");
-  const emoji = category ? CATEGORY_PLACEHOLDERS[category] : null;
+// Real stock image for each category using Picsum with consistent seed
+function getCategoryStockImage(category: string, seed: string): string {
+  // Use picsum.photos which returns real photos (random but stable per seed)
+  return `https://picsum.photos/seed/${encodeURIComponent(category + "-" + seed)}/600/600`;
+}
 
-  if (hasError || !src) {
+export default function ProductImage({ src, alt, className, category, slug }: Props) {
+  const [errorLevel, setErrorLevel] = useState(0);
+  const emoji = category ? CATEGORY_PLACEHOLDERS[category] : "🛍️";
+
+  // Level 0: original src (if valid)
+  // Level 1: Picsum fallback (real photo, stable)
+  // Level 2: emoji only (last resort)
+
+  const initialSrc = !src || src === "" ? null : src;
+
+  if (errorLevel >= 2 || (errorLevel === 0 && !initialSrc)) {
+    if (initialSrc === null && category) {
+      // No source - go directly to picsum
+      return (
+        /* eslint-disable-next-line @next/next/no-img-element */
+        <img
+          src={getCategoryStockImage(category, slug || alt)}
+          alt={alt}
+          className={className}
+          loading="lazy"
+          onError={() => setErrorLevel(2)}
+        />
+      );
+    }
     return (
       <div
         className={`${className ?? ""} bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center`}
       >
-        <span className="text-6xl opacity-60">{emoji ?? "🛍️"}</span>
+        <span className="text-6xl opacity-60">{emoji}</span>
       </div>
     );
   }
 
+  const currentSrc =
+    errorLevel === 0
+      ? initialSrc
+      : getCategoryStockImage(category || "product", slug || alt);
+
   return (
     /* eslint-disable-next-line @next/next/no-img-element */
     <img
-      src={src}
+      src={currentSrc!}
       alt={alt}
       className={className}
       loading="lazy"
-      onError={() => setHasError(true)}
+      onError={() => setErrorLevel((l) => l + 1)}
       referrerPolicy="no-referrer"
     />
   );

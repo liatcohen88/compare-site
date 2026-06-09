@@ -84,7 +84,7 @@ export default function PriceComparisonTable({ offers }: Props) {
                         : "bg-blue-500 text-white"
                     }`}
                   >
-                    לחנות {vendor.name} ←
+                    🛒 לקנייה ב-{vendor.name}
                   </a>
                 ) : (
                   <div className="block text-center w-full py-3 rounded-xl font-bold bg-slate-100 text-slate-400">
@@ -170,7 +170,7 @@ export default function PriceComparisonTable({ offers }: Props) {
                             : "bg-blue-500 text-white hover:bg-blue-600"
                         }`}
                       >
-                        לחנות ←
+                        🛒 לקנייה ב-{vendor.name}
                       </a>
                     ) : (
                       <span className="text-sm text-slate-400">לא במלאי</span>
