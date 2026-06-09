@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import { CATEGORIES } from "@/lib/config";
 import CategoryDropdown from "./CategoryDropdown";
 
@@ -12,6 +11,8 @@ const HEADER_CATS = [
   "kitchen",
   "kids",
   "home",
+  "smartphones",
+  "headphones",
 ];
 
 export default function Header() {
@@ -22,60 +23,23 @@ export default function Header() {
   return (
     <header className="border-b border-slate-200 bg-white sticky top-0 z-50 shadow-sm">
       <div className="max-w-7xl mx-auto px-4">
-        {/* שורה עליונה - מובייל: לוגו במרכז + אודות בצד */}
-        <div className="flex items-center justify-center md:justify-between h-24 md:h-28 relative">
-          <Link href="/about" className="hidden md:block text-sm text-slate-600 hover:text-blue-600 shrink-0 order-3">
-            אודות
-          </Link>
-
-          <Link href="/" className="flex items-center group" aria-label="השווה לי">
-            <Image
-              src="/logo.png"
-              alt="השווה לי"
-              width={400}
-              height={120}
-              priority
-              className="h-20 md:h-24 w-auto"
-            />
-          </Link>
-
-          {/* אודות במובייל - בפינה ימנית מוחלטת */}
-          <Link href="/about" className="md:hidden absolute right-0 text-xs text-slate-500 hover:text-blue-600">
-            אודות
-          </Link>
-
-          {/* תפריט קטגוריות בדסקטופ */}
-          <nav className="hidden md:flex items-center gap-1 order-2">
-            <CategoryDropdown />
-            {headerCats.slice(0, 4).map((cat) => (
-              <Link
-                key={cat.slug}
-                href={`/category/${cat.slug}`}
-                className="px-2 py-2 text-sm text-slate-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg"
-              >
-                {cat.icon} {cat.name}
-              </Link>
-            ))}
-          </nav>
-        </div>
-
-        {/* שורה תחתונה - כל הקטגוריות בגלילה אופקית */}
-        <div className="flex gap-2 overflow-x-auto pb-3 pt-1 items-center scrollbar-hide">
-          <Link
-            href="/categories"
-            className="shrink-0 px-3 py-1.5 text-sm bg-blue-600 text-white hover:bg-blue-700 rounded-full font-semibold flex items-center gap-1"
-          >
-            📋 כל הקטגוריות
-          </Link>
+        <div className="flex items-center gap-2 py-3 overflow-x-auto scrollbar-hide">
+          <CategoryDropdown />
           {headerCats.map((cat) => (
             <Link
               key={cat.slug}
               href={`/category/${cat.slug}`}
-              className="shrink-0 px-3 py-1.5 text-sm bg-slate-100 hover:bg-blue-50 hover:text-blue-600 rounded-full"
+              className="shrink-0 px-3 py-1.5 text-sm bg-slate-100 hover:bg-blue-50 hover:text-blue-600 rounded-full whitespace-nowrap"
             >
               {cat.icon} {cat.name}
             </Link>
           ))}
+          <Link
+            href="/about"
+            className="shrink-0 px-3 py-1.5 text-sm text-slate-500 hover:text-blue-600 mr-auto"
+          >
+            אודות
+          </Link>
         </div>
       </div>
     </header>
