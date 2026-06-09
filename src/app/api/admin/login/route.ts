@@ -12,7 +12,7 @@ export async function POST(req: NextRequest) {
     if (!password || !verifyPassword(password)) {
       return NextResponse.json({ ok: false }, { status: 401 });
     }
-    const token = createSessionToken();
+    const token = await createSessionToken();
     const res = NextResponse.json({ ok: true });
     res.cookies.set(SESSION_COOKIE, token, {
       httpOnly: true,
