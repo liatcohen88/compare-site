@@ -13,9 +13,9 @@ export default function Footer() {
             <Image
               src="/logo.png"
               alt={SITE_NAME}
-              width={140}
-              height={40}
-              className="h-10 w-auto mb-3"
+              width={200}
+              height={60}
+              className="h-14 w-auto mb-3"
             />
             <p className="text-sm text-slate-600">
               משווה המחירים המוביל בישראל - השוואה בין KSP, אמזון, אליאקספרס ושיין.

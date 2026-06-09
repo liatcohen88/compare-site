@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 const DEFAULT_BRANDING = {
   logoEmoji: "💰",
   logoUrl: "",
+  logoSize: 64, // px height
   faviconUrl: "",
   primaryColor: "#0066ff",
   accentColor: "#ff6b9d",
@@ -62,6 +63,43 @@ export default function BrandingPage() {
             className="w-24 px-4 py-3 text-3xl text-center border-2 border-slate-200 rounded-xl focus:border-blue-500 focus:outline-none"
           />
           <p className="text-xs text-slate-500 mt-1">דוגמאות: 💰 🛍️ 🎯 ✨ 🌟 💎</p>
+        </div>
+
+        <div className="border-t border-slate-200 pt-4">
+          <label className="block text-sm font-semibold text-slate-700 mb-1">
+            גודל לוגו (גובה בפיקסלים): {branding.logoSize}px
+          </label>
+          <input
+            type="range"
+            min={32}
+            max={120}
+            value={branding.logoSize}
+            onChange={(e) => update("logoSize", Number(e.target.value))}
+            className="w-full accent-blue-600"
+          />
+          <div className="flex justify-between text-xs text-slate-400 mt-1">
+            <span>קטן (32)</span>
+            <span>בינוני (64)</span>
+            <span>גדול (120)</span>
+          </div>
+          <div className="mt-3 p-4 bg-slate-50 rounded-lg flex items-center justify-center">
+            {branding.logoUrl ? (
+              /* eslint-disable-next-line @next/next/no-img-element */
+              <img
+                src={branding.logoUrl}
+                alt="preview"
+                style={{ height: branding.logoSize }}
+                className="w-auto"
+              />
+            ) : (
+              <div
+                className="bg-blue-100 rounded-lg flex items-center justify-center text-blue-600 font-bold"
+                style={{ height: branding.logoSize, padding: "0 1rem" }}
+              >
+                השווה לי
+              </div>
+            )}
+          </div>
         </div>
 
         <div className="border-t border-slate-200 pt-4">

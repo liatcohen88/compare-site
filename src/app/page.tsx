@@ -15,10 +15,10 @@ export default function HomePage() {
       <section className="bg-gradient-to-l from-blue-600 to-blue-800 text-white">
         <div className="max-w-7xl mx-auto px-4 py-16 md:py-24 text-center">
           <h1 className="text-4xl md:text-6xl font-extrabold mb-4">
-            תפסיקי לשלם יותר מדי
+            תפסיק לשלם יותר מדי!
           </h1>
           <p className="text-xl md:text-2xl text-blue-100 mb-2">
-            אופנה, יופי, אקססוריז, אלקטרוניקה - השוואת מחירים בלחיצה אחת
+            לנשים וגברים · אופנה, יופי, גאדג&apos;טים, אלקטרוניקה - השוואת מחירים בלחיצה אחת
           </p>
           <p className="text-blue-200">
             KSP · אמזון · אליאקספרס · שיין · מעודכן יומית · חינמי לחלוטין
