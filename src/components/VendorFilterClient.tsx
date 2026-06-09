@@ -70,7 +70,8 @@ export default function VendorFilterClient({ products }: Props) {
                     : "border-slate-200 bg-white text-slate-700 hover:border-blue-300"
                 }`}
               >
-                <span>{v.countryFlag}</span>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={v.logo} alt="" className="w-4 h-4 rounded-sm" />
                 <span>{v.name}</span>
                 <span className={`text-xs ${active ? "text-blue-100" : "text-slate-400"}`}>
                   ({counts[id]})

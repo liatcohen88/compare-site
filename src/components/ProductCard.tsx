@@ -61,18 +61,29 @@ export default function ProductCard({ product }: Props) {
                 </span>
               )}
             </div>
-            <div className="text-xs text-slate-600">
-              ב-{VENDORS[cheapest.vendor].name} {VENDORS[cheapest.vendor].countryFlag}
+            <div className="text-xs text-slate-600 flex items-center gap-1">
+              <span>ב-{VENDORS[cheapest.vendor].name}</span>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={VENDORS[cheapest.vendor].logo}
+                alt=""
+                className="w-4 h-4 rounded-sm inline-block"
+              />
             </div>
           </div>
         )}
 
         <div className="flex items-center gap-1 mt-3 text-xs text-slate-500">
-          <span className="flex gap-0.5">
+          <span className="flex gap-1">
             {product.offers.map((o) => (
-              <span key={o.vendor} title={VENDORS[o.vendor].name}>
-                {VENDORS[o.vendor].countryFlag}
-              </span>
+              /* eslint-disable-next-line @next/next/no-img-element */
+              <img
+                key={o.vendor}
+                src={VENDORS[o.vendor].logo}
+                alt={VENDORS[o.vendor].name}
+                title={VENDORS[o.vendor].name}
+                className="w-4 h-4 rounded-sm"
+              />
             ))}
           </span>
           <span>·</span>

@@ -13,6 +13,7 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "s.click.aliexpress.com" },
       { protocol: "https", hostname: "m.media-amazon.com" },
       { protocol: "https", hostname: "img.ltwebstatic.com" },
+      { protocol: "https", hostname: "www.google.com" },
     ],
   },
 };

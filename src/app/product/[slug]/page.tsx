@@ -135,9 +135,15 @@ export default async function ProductPage({ params }: PageProps) {
                 <div className="text-3xl font-bold text-green-700 numeric">
                   {formatPrice(cheapest.price + cheapest.shippingPrice)}
                 </div>
-                <div className="text-sm text-green-600 mt-1">
-                  ב-{VENDORS[cheapest.vendor].name} {VENDORS[cheapest.vendor].countryFlag} ·
-                  משלוח {VENDORS[cheapest.vendor].shippingDays} ימים
+                <div className="text-sm text-green-600 mt-1 flex items-center gap-1">
+                  <span>ב-{VENDORS[cheapest.vendor].name}</span>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={VENDORS[cheapest.vendor].logo}
+                    alt=""
+                    className="w-4 h-4 rounded-sm"
+                  />
+                  <span>· משלוח {VENDORS[cheapest.vendor].shippingDays} ימים</span>
                 </div>
               </div>
             )}
