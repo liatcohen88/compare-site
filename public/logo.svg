@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 120" width="400" height="120">
+  <defs>
+    <linearGradient id="brandGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0066ff"/>
+      <stop offset="100%" stop-color="#0052cc"/>
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff6b9d"/>
+      <stop offset="100%" stop-color="#ff4785"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Icon: magnifying glass with comparison bars -->
+  <g transform="translate(20, 22)">
+    <!-- Magnifying glass circle -->
+    <circle cx="38" cy="38" r="32" fill="none" stroke="url(#brandGrad)" stroke-width="7"/>
+    <!-- Handle -->
+    <line x1="61" y1="61" x2="78" y2="78" stroke="url(#brandGrad)" stroke-width="8" stroke-linecap="round"/>
+
+    <!-- Comparison bars inside -->
+    <rect x="22" y="40" width="8" height="18" rx="2" fill="url(#brandGrad)"/>
+    <rect x="34" y="30" width="8" height="28" rx="2" fill="url(#accentGrad)"/>
+    <rect x="46" y="22" width="8" height="36" rx="2" fill="url(#brandGrad)"/>
+
+    <!-- Checkmark -->
+    <path d="M 26 19 L 32 25 L 44 13" stroke="#10b981" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Brand text -->
+  <text x="115" y="58" font-family="'Heebo', system-ui, -apple-system, sans-serif" font-weight="800" font-size="42" fill="#0f172a">
+    Hashveli
+  </text>
+
+  <!-- Hebrew tagline -->
+  <text x="115" y="92" font-family="'Heebo', system-ui, -apple-system, sans-serif" font-weight="500" font-size="20" fill="#0066ff" direction="rtl">
+    השוואת מחירים בלחיצה
+  </text>
+</svg>

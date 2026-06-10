@@ -1,4 +1,5 @@
-export const SITE_NAME = "השווה לי";
+export const SITE_NAME = "Hashveli - השוואת מחירים";
+export const SITE_NAME_SHORT = "Hashveli";
 export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://hashveli.co.il";
 

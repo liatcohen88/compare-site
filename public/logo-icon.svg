@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <defs>
+    <linearGradient id="iconBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0066ff"/>
+      <stop offset="100%" stop-color="#0052cc"/>
+    </linearGradient>
+    <linearGradient id="iconAccent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff6b9d"/>
+      <stop offset="100%" stop-color="#ff4785"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Rounded background -->
+  <rect width="100" height="100" rx="20" fill="url(#iconBg)"/>
+
+  <!-- Magnifying glass white circle -->
+  <circle cx="42" cy="42" r="24" fill="none" stroke="#ffffff" stroke-width="5"/>
+  <!-- Handle -->
+  <line x1="59" y1="59" x2="76" y2="76" stroke="#ffffff" stroke-width="6" stroke-linecap="round"/>
+
+  <!-- Comparison bars inside -->
+  <rect x="30" y="44" width="6" height="14" rx="1.5" fill="#ffffff"/>
+  <rect x="40" y="36" width="6" height="22" rx="1.5" fill="url(#iconAccent)"/>
+  <rect x="50" y="28" width="6" height="30" rx="1.5" fill="#ffffff"/>
+</svg>

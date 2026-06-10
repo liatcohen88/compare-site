@@ -11,11 +11,11 @@ export default function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           <div>
             <Image
-              src="/logo.png"
+              src="/logo.svg"
               alt={SITE_NAME}
               width={200}
               height={60}
-              className="h-14 w-auto mb-3"
+              className="h-12 w-auto mb-3"
             />
             <p className="text-sm text-slate-600">
               משווה המחירים המוביל בישראל - השוואה בין KSP, אמזון, אליאקספרס ושיין.
