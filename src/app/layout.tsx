@@ -34,6 +34,9 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
   verification: {
     google: "FdR3p8GFolzFP2DKQLp7D-cw8ZZari_mD-o5X_dDsa0",
+    other: {
+      "impact-site-verification": "9514de83-1088-4379-8033-f3a50e2e0cb5",
+    },
   },
 };
 
@@ -44,6 +47,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="he" dir="rtl" className={`${heebo.variable} h-full antialiased`}>
+      <head>
+        {/* Impact.com verification - requires `value` attribute */}
+        <meta
+          name="impact-site-verification"
+          // @ts-expect-error - Impact requires `value` attribute
+          value="9514de83-1088-4379-8033-f3a50e2e0cb5"
+        />
+      </head>
       <body className="min-h-full flex flex-col bg-white text-slate-900">
         <Header />
         <main className="flex-1">{children}</main>
