@@ -35,8 +35,14 @@ export default function Header() {
             </Link>
           ))}
           <Link
+            href="/blog"
+            className="shrink-0 px-3 py-1.5 text-sm bg-purple-100 text-purple-700 hover:bg-purple-200 rounded-full font-semibold mr-auto"
+          >
+            📚 בלוג
+          </Link>
+          <Link
             href="/about"
-            className="shrink-0 px-3 py-1.5 text-sm text-slate-500 hover:text-blue-600 mr-auto"
+            className="shrink-0 px-3 py-1.5 text-sm text-slate-500 hover:text-blue-600"
           >
             אודות
           </Link>
