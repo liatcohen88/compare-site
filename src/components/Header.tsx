@@ -7,15 +7,28 @@ export default function Header() {
     <header className="border-b border-slate-200 bg-white sticky top-0 z-50 shadow-sm">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center justify-between gap-3 py-3">
-          <Link href="/" className="flex items-center shrink-0" aria-label="Hashveli - השוואת מחירים">
+          {/* Logo: icon + text */}
+          <Link
+            href="/"
+            className="flex items-center gap-2 shrink-0 group"
+            aria-label="Hashveli - השוואת מחירים"
+          >
             <Image
-              src="/logo.svg"
-              alt="Hashveli - השוואת מחירים"
-              width={200}
-              height={60}
+              src="/logo-icon.svg"
+              alt=""
+              width={48}
+              height={48}
               priority
-              className="h-12 md:h-14 w-auto"
+              className="w-10 h-10 md:w-12 md:h-12"
             />
+            <div className="flex flex-col leading-tight">
+              <span className="text-2xl md:text-3xl font-extrabold text-slate-900 group-hover:text-blue-600">
+                Hashveli
+              </span>
+              <span className="text-[10px] md:text-xs text-slate-500 font-medium">
+                השוואת מחירים בלחיצה
+              </span>
+            </div>
           </Link>
 
           <div className="flex items-center gap-2">
