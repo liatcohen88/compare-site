@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   verification: {
     google: "FdR3p8GFolzFP2DKQLp7D-cw8ZZari_mD-o5X_dDsa0",
     other: {
-      "impact-site-verification": "9514de83-1088-4379-8033-f3a50e2e0cb5",
+      "impact-site-verification": "57fcec31-3d67-412c-9746-d580f7f5869c",
     },
   },
 };
@@ -52,7 +52,7 @@ export default function RootLayout({
         <meta
           name="impact-site-verification"
           // @ts-expect-error - Impact requires `value` attribute
-          value="9514de83-1088-4379-8033-f3a50e2e0cb5"
+          value="57fcec31-3d67-412c-9746-d580f7f5869c"
         />
       </head>
       <body className="min-h-full flex flex-col bg-white text-slate-900">
