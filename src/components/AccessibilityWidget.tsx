@@ -69,9 +69,36 @@ export default function AccessibilityWidget() {
         aria-label="פתח תפריט נגישות"
         title="נגישות"
       >
-        <span className="text-3xl text-white" aria-hidden="true">
-          ♿
-        </span>
+        <svg
+          viewBox="0 0 100 100"
+          className="w-10 h-10"
+          aria-hidden="true"
+          fill="#fbbf24"
+        >
+          {/* Head */}
+          <circle cx="60" cy="20" r="8" />
+          {/* Body + leaning arm forward */}
+          <path d="M 56 30 Q 50 40 38 48 Q 35 50 38 53 Q 41 56 44 54 L 56 46 L 62 38 Z" />
+          {/* Arm pushing wheel back */}
+          <path
+            d="M 60 32 Q 72 38 74 56"
+            stroke="#fbbf24"
+            strokeWidth="6"
+            strokeLinecap="round"
+            fill="none"
+          />
+          {/* Wheel outer */}
+          <circle
+            cx="50"
+            cy="72"
+            r="20"
+            fill="none"
+            stroke="#fbbf24"
+            strokeWidth="5"
+          />
+          {/* Wheel hub */}
+          <circle cx="50" cy="72" r="4" />
+        </svg>
       </button>
 
       {open && (
