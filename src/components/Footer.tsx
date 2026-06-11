@@ -37,6 +37,7 @@ export default function Footer() {
               <li><Link href="/privacy" className="hover:text-blue-600">מדיניות פרטיות</Link></li>
               <li><Link href="/terms" className="hover:text-blue-600">תנאי שימוש</Link></li>
               <li><Link href="/affiliate-disclosure" className="hover:text-blue-600">גילוי שותפים</Link></li>
+              <li><Link href="/accessibility" className="hover:text-blue-600">♿ הצהרת נגישות</Link></li>
             </ul>
           </div>
 

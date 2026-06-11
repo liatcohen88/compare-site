@@ -59,6 +59,59 @@ a, button {
   display: none;
 }
 
+/* Accessibility modes */
+.a11y-high-contrast {
+  filter: contrast(1.4);
+}
+.a11y-high-contrast body {
+  background: #ffffff !important;
+  color: #000000 !important;
+}
+.a11y-high-contrast a {
+  color: #0000ee !important;
+  text-decoration: underline !important;
+}
+
+.a11y-reduce-motion *,
+.a11y-reduce-motion *::before,
+.a11y-reduce-motion *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
+}
+
+.a11y-underline-links a {
+  text-decoration: underline !important;
+  text-underline-offset: 3px !important;
+}
+
+.a11y-dyslexic-font,
+.a11y-dyslexic-font * {
+  font-family: "Comic Sans MS", "Comic Sans", Arial, sans-serif !important;
+  letter-spacing: 0.05em !important;
+  word-spacing: 0.1em !important;
+  line-height: 1.8 !important;
+}
+
+/* Focus indicator for keyboard navigation */
+*:focus-visible {
+  outline: 3px solid #0066ff !important;
+  outline-offset: 2px !important;
+  border-radius: 4px;
+}
+
+/* Respect user's prefers-reduced-motion system setting */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
 /* Blog typography */
 .blog-content {
   font-size: 17px;

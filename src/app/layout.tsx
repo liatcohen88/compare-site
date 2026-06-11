@@ -6,6 +6,7 @@ import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import AccessibilityWidget from "@/components/AccessibilityWidget";
 import { SITE_URL } from "@/lib/config";
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID || "G-QMMNLR39PW";
@@ -59,6 +60,7 @@ export default function RootLayout({
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
+        <AccessibilityWidget />
         <Analytics />
         <SpeedInsights />
         {GA_ID && <GoogleAnalytics gaId={GA_ID} />}
