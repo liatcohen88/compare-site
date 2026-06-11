@@ -65,43 +65,13 @@ export default function AccessibilityWidget() {
     <>
       <button
         onClick={() => setOpen(true)}
-        className="fixed bottom-4 left-4 z-40 w-14 h-14 rounded-full bg-blue-600 hover:bg-blue-700 shadow-lg flex items-center justify-center transition-transform hover:scale-110"
+        className="fixed bottom-4 left-4 z-40 w-16 h-16 rounded-full bg-gradient-to-br from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 shadow-xl flex items-center justify-center transition-transform hover:scale-110 ring-4 ring-white"
         aria-label="פתח תפריט נגישות"
         title="נגישות"
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 64 64"
-          className="w-9 h-9"
-          aria-hidden="true"
-        >
-          {/* Head */}
-          <circle cx="42" cy="14" r="5" fill="#fbbf24" />
-          {/* Body leaning forward + arm pushing wheel */}
-          <path
-            d="M 41 22 Q 39 30 33 33 L 24 30 Q 21 30 21 33 Q 21 36 24 36 L 32 39 Q 36 39 38 36 L 41 30 Z"
-            fill="#fbbf24"
-          />
-          {/* Trailing arm/body curve to wheel */}
-          <path
-            d="M 39 23 Q 47 30 45 42"
-            stroke="#fbbf24"
-            strokeWidth="4"
-            strokeLinecap="round"
-            fill="none"
-          />
-          {/* Wheel - outer circle */}
-          <circle
-            cx="32"
-            cy="48"
-            r="11"
-            fill="none"
-            stroke="#fbbf24"
-            strokeWidth="3.5"
-          />
-          {/* Wheel - inner dot for spoke center */}
-          <circle cx="32" cy="48" r="2" fill="#fbbf24" />
-        </svg>
+        <span className="text-3xl text-white" aria-hidden="true">
+          ♿
+        </span>
       </button>
 
       {open && (
