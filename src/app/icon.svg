@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0066ff"/>
+      <stop offset="100%" stop-color="#0052cc"/>
+    </linearGradient>
+    <linearGradient id="g2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ff6b9d"/>
+      <stop offset="100%" stop-color="#ff4785"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Rounded square background -->
+  <rect width="64" height="64" rx="14" fill="url(#g1)"/>
+
+  <!-- Three comparison bars -->
+  <rect x="14" y="32" width="8" height="20" rx="2" fill="#ffffff" opacity="0.85"/>
+  <rect x="26" y="22" width="8" height="30" rx="2" fill="url(#g2)"/>
+  <rect x="38" y="14" width="8" height="38" rx="2" fill="#ffffff"/>
+
+  <!-- Checkmark on top of tallest bar -->
+  <path d="M 38 18 L 42 22 L 50 13" stroke="#10b981" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
