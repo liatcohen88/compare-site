@@ -17,24 +17,21 @@ export default function ContactPage() {
 
       <div className="bg-blue-50 border border-blue-200 rounded-xl p-6 space-y-4">
         <div>
-          <h2 className="font-bold text-slate-900 mb-1">📧 אימייל כללי</h2>
-          <a href="mailto:info@hashveli.co.il" className="text-blue-600 hover:underline">
-            info@hashveli.co.il
+          <h2 className="font-bold text-slate-900 mb-1">📧 אימייל לכל פניה</h2>
+          <a
+            href="mailto:motiva8891@gmail.com"
+            className="text-blue-600 hover:underline text-lg"
+          >
+            motiva8891@gmail.com
           </a>
+          <p className="text-sm text-slate-600 mt-2">
+            לפניות כלליות, דיווח על תקלות, מחירים שגויים, שותפויות ופרסום
+          </p>
         </div>
 
-        <div>
-          <h2 className="font-bold text-slate-900 mb-1">🐛 דיווח על תקלה / מחיר שגוי</h2>
-          <a href="mailto:bugs@hashveli.co.il" className="text-blue-600 hover:underline">
-            bugs@hashveli.co.il
-          </a>
-        </div>
-
-        <div>
-          <h2 className="font-bold text-slate-900 mb-1">🤝 שותפויות / פרסום</h2>
-          <a href="mailto:partners@hashveli.co.il" className="text-blue-600 hover:underline">
-            partners@hashveli.co.il
-          </a>
+        <div className="border-t border-blue-200 pt-4">
+          <h2 className="font-bold text-slate-900 mb-1">👤 בעלת האתר</h2>
+          <p className="text-slate-700">ליאת כהן</p>
         </div>
       </div>
 

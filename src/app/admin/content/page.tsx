@@ -10,7 +10,7 @@ const DEFAULT_CONTENT = {
   footerSlogan: "משווה המחירים המוביל בישראל - השוואה בין KSP, אמזון, אליאקספרס ושיין.",
   aboutMission:
     "אנחנו אתר השוואת מחירים עצמאי, שמטרתו היחידה לחסוך לכם כסף.",
-  contactEmail: "info@hashveli.co.il",
+  contactEmail: "motiva8891@gmail.com",
 };
 
 export default function ContentPage() {

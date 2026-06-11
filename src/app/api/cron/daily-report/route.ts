@@ -17,8 +17,8 @@ import { CATEGORIES } from "@/lib/config";
 
 const CRON_SECRET = process.env.CRON_SECRET;
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
-const ADMIN_EMAIL = process.env.ADMIN_EMAIL || "info@hashveli.co.il";
-const FROM_EMAIL = process.env.FROM_EMAIL || "report@hashveli.co.il";
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL || "motiva8891@gmail.com";
+const FROM_EMAIL = process.env.FROM_EMAIL || "motiva8891@gmail.com";
 
 export async function GET(req: NextRequest) {
   // Verify cron secret (Vercel cron sends this automatically)

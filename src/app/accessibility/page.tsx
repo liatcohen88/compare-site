@@ -73,10 +73,10 @@ export default function AccessibilityPage() {
         <p className="text-slate-700">
           📧 אימייל:{" "}
           <a
-            href="mailto:accessibility@hashveli.co.il"
+            href="mailto:motiva8891@gmail.com"
             className="text-blue-600 hover:underline"
           >
-            accessibility@hashveli.co.il
+            motiva8891@gmail.com
           </a>
         </p>
       </div>
