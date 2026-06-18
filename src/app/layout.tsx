@@ -3,6 +3,7 @@ import { Heebo } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import Script from "next/script";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -64,6 +65,11 @@ export default function RootLayout({
         <Analytics />
         <SpeedInsights />
         {GA_ID && <GoogleAnalytics gaId={GA_ID} />}
+        {/* Skimlinks - auto-monetize outbound links (Shein, ASOS, Sephora etc.) */}
+        <Script
+          src="https://s.skimresources.com/js/304934X1793125.skimlinks.js"
+          strategy="lazyOnload"
+        />
       </body>
     </html>
   );
