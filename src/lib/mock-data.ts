@@ -1,5 +1,9 @@
 import type { Product } from "./types";
 import { GENERATED_PRODUCTS } from "./generated-products";
+import KSP_PRODUCTS from "./ksp-products.json";
+
+type KspEntry = { uin: number; name: string; price: number; img: string; url: string };
+const KSP_MAP = KSP_PRODUCTS as Record<string, KspEntry>;
 
 // Affiliate link helpers - point to working search URLs on each store
 function kspSearch(query: string): string {
@@ -1178,8 +1182,9 @@ export const MOCK_PRODUCTS: Product[] = [
 // MOCK_PRODUCTS are curated popular products that exist in multiple stores
 // STRICT: keep only offers with a real product URL. Drop everything else.
 // - Amazon: ASIN must match /^B0[A-Z0-9]{8}$/ → builds /dp/ASIN
-// - AliExpress/KSP/Shein: only kept if offer.url is already a real product URL
-//   (no MOCK_PRODUCT currently has those, so they get dropped)
+// - KSP: replaced with real KSP API data (uin + product URL) when available
+// - AliExpress: only kept if offer.url is a real promotion_link
+// - Shein: dropped (no real product IDs in MOCK)
 function fixMockProductLinks(products: Product[]) {
   for (const p of products) {
     p.offers = p.offers.filter((offer) => {
@@ -1197,15 +1202,23 @@ function fixMockProductLinks(products: Product[]) {
             /aliexpress\.com\/item\/\d+/.test(offer.url))
         );
       }
-      if (offer.vendor === "ksp") {
-        return (
-          typeof offer.url === "string" &&
-          /ksp\.co\.il\/(web\/item|item\/[A-Z]?\d)/.test(offer.url)
-        );
-      }
-      // Shein: no real product IDs in MOCK → drop
+      // KSP & Shein from MOCK definitions → drop (KSP gets re-added below if we have real data)
       return false;
     });
+
+    // Inject real KSP offer if we have it
+    const ksp = KSP_MAP[p.id];
+    if (ksp) {
+      p.offers.push({
+        vendor: "ksp",
+        price: ksp.price,
+        shippingPrice: 0,
+        inStock: true,
+        url: ksp.url,
+        vendorSku: String(ksp.uin),
+        lastUpdated: now,
+      });
+    }
   }
 }
 
