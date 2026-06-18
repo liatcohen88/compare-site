@@ -2,21 +2,22 @@ import type { Product } from "./types";
 import { KSP_AFFILIATE_ID } from "./config";
 import { GENERATED_PRODUCTS } from "./generated-products";
 
-// Affiliate link helpers - all use SEARCH URLs to avoid 404s on hardcoded SKUs
+// Affiliate link helpers - point to working search URLs on each store
 function kspSearch(query: string): string {
-  // KSP affiliate entry URL - sets cookie, then user can browse
-  return `https://ksp.co.il/m_action/api/search?text=${encodeURIComponent(query)}&aff=${KSP_AFFILIATE_ID}`;
+  // KSP's actual public search page (the /m_action/api was JSON API → 404)
+  return `https://ksp.co.il/web/search?text=${encodeURIComponent(query)}&af=${KSP_AFFILIATE_ID}`;
 }
 function amazonSearch(query: string): string {
-  // Filter to Amazon Global Store (ships internationally including Israel)
+  // Amazon Global Store filter (ships to Israel) - with hashveli-20 tag
   return `https://www.amazon.com/s?k=${encodeURIComponent(query)}&i=amazon-global-store&tag=hashveli-20`;
 }
 function aliSearch(query: string): string {
-  // Direct AliExpress search - tracking via cookie when user clicks our affiliate
-  return `https://www.aliexpress.com/wholesale?SearchText=${encodeURIComponent(query)}`;
+  // AliExpress global search - works for any product/keyword
+  return `https://www.aliexpress.com/w/wholesale-${encodeURIComponent(query.replace(/\s+/g, "-"))}.html`;
 }
 function sheinSearch(query: string): string {
-  return `https://us.shein.com/pdsearch/${encodeURIComponent(query)}/`;
+  // Shein US search (better English support than IL)
+  return `https://us.shein.com/pdsearch/${encodeURIComponent(query.replace(/\s+/g, "%20"))}/?ici=us_tab01navbar03menu01dir01&scici=Search~~EditSearch~~1~~${encodeURIComponent(query)}~~`;
 }
 
 const kspLink = (productName: string, _sku?: string) => kspSearch(productName);
