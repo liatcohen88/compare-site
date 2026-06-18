@@ -1258,23 +1258,32 @@ const SUSPECT_AUTO_IMAGE_IDS = new Set([
   "baby-monitor-wifi",
 ]);
 
-// Keep only products that have at least one real-URL offer (and aren't on the
-// suspect-image blocklist). Better to show fewer items than wrong ones.
+// Full catalog: keep every product so URLs (Google index, shared links) never 404.
+// SUSPECT_AUTO_IMAGE_IDS still removed because their images don't match the title.
 const ALL_PRODUCTS: Product[] = [
-  ...MOCK_PRODUCTS.filter(
-    (p) => p.offers.length > 0 && !SUSPECT_AUTO_IMAGE_IDS.has(p.id),
-  ),
-  ...GENERATED_PRODUCTS.filter((p) => p.offers.length > 0),
+  ...MOCK_PRODUCTS.filter((p) => !SUSPECT_AUTO_IMAGE_IDS.has(p.id)),
+  ...GENERATED_PRODUCTS,
 ];
+
+// Browse views (homepage/category) should only show products with at least one
+// real offer - empty products are deep-linkable but not browse-discoverable.
+const BROWSABLE_PRODUCTS = ALL_PRODUCTS.filter((p) => p.offers.length > 0);
 
 export function getProductBySlug(slug: string): Product | undefined {
   return ALL_PRODUCTS.find((p) => p.slug === slug);
 }
 
 export function getProductsByCategory(category: string): Product[] {
-  return ALL_PRODUCTS.filter((p) => p.category === category);
+  return BROWSABLE_PRODUCTS.filter((p) => p.category === category);
 }
 
+// Browse list: only products with real offers (homepage, category pages).
 export function getAllProducts(): Product[] {
+  return BROWSABLE_PRODUCTS;
+}
+
+// Full catalog: every product slug, including ones with no current offer.
+// Used by generateStaticParams + sitemap so deep links never 404.
+export function getAllProductSlugs(): Product[] {
   return ALL_PRODUCTS;
 }

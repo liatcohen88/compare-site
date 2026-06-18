@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { getProductBySlug, getProductsByCategory, getAllProducts } from "@/lib/mock-data";
+import { getProductBySlug, getProductsByCategory, getAllProductSlugs } from "@/lib/mock-data";
 import { CATEGORIES, VENDORS } from "@/lib/config";
 import { formatPrice } from "@/lib/format";
 import PriceComparisonTable from "@/components/PriceComparisonTable";
@@ -13,7 +13,7 @@ interface PageProps {
 }
 
 export async function generateStaticParams() {
-  return getAllProducts().map((p) => ({ slug: p.slug }));
+  return getAllProductSlugs().map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
@@ -170,11 +170,34 @@ export default async function ProductPage({ params }: PageProps) {
           <h2 className="text-2xl font-bold text-slate-900 mb-4">
             השוואת מחירים בין החנויות
           </h2>
-          <PriceComparisonTable offers={product.offers} />
-          <p className="text-xs text-slate-500 mt-3">
-            * המחירים מתעדכנים מדי יום. ייתכן שינוי קל מול האתר המקור.
-            כאתר שותפים אנו מקבלים עמלה מרכישות זכאיות - ללא תוספת עלות עבורך.
-          </p>
+          {product.offers.length > 0 ? (
+            <>
+              <PriceComparisonTable offers={product.offers} />
+              <p className="text-xs text-slate-500 mt-3">
+                * המחירים מתעדכנים מדי יום. ייתכן שינוי קל מול האתר המקור.
+                כאתר שותפים אנו מקבלים עמלה מרכישות זכאיות - ללא תוספת עלות עבורך.
+              </p>
+            </>
+          ) : (
+            <div className="bg-amber-50 border border-amber-200 rounded-xl p-6 text-center">
+              <div className="text-4xl mb-2">🔍</div>
+              <h3 className="font-bold text-amber-900 mb-1">
+                המחיר עוד לא זמין למוצר זה
+              </h3>
+              <p className="text-sm text-amber-700 mb-4">
+                אנחנו עובדים על הוספת חנויות מאומתות עבור מוצר זה. בינתיים מצאי
+                מוצרים דומים בקטגוריה.
+              </p>
+              {cat && (
+                <Link
+                  href={`/category/${cat.slug}`}
+                  className="inline-block px-5 py-2 bg-amber-600 text-white font-semibold rounded-full hover:bg-amber-700"
+                >
+                  {cat.icon} כל ה{cat.name} →
+                </Link>
+              )}
+            </div>
+          )}
         </section>
 
         {related.length > 0 && (
