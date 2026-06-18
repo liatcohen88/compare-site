@@ -1221,6 +1221,16 @@ function fixMockProductLinks(products: Product[]) {
         vendorSku: String(ksp.uin),
         lastUpdated: now,
       });
+
+      // Replace AliExpress-search-fetched images with KSP's real product image
+      // (KSP image always matches the actual product the URL points to)
+      if (
+        !p.imageUrl ||
+        p.imageUrl.includes("aliexpress-media.com") ||
+        p.imageUrl.includes("unsplash.com")
+      ) {
+        p.imageUrl = ksp.img;
+      }
     }
   }
 }

@@ -5,7 +5,10 @@ import ProductCard from "@/components/ProductCard";
 import VendorFilterClient from "@/components/VendorFilterClient";
 
 export default function HomePage() {
-  const products = getAllProducts();
+  // Show multi-store comparisons first - real comparisons beat single-vendor listings
+  const products = [...getAllProducts()].sort(
+    (a, b) => b.offers.length - a.offers.length,
+  );
   const popularCats = POPULAR_CATEGORIES.map((slug) =>
     CATEGORIES.find((c) => c.slug === slug),
   ).filter((c): c is (typeof CATEGORIES)[number] => Boolean(c));
