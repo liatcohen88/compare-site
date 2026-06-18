@@ -115,6 +115,14 @@ export default function ProductImage({
   // Use proxy for all external images for reliability
   const finalSrc = proxyImage(src);
 
+  // Detect broken images even when proxy returns 200 with empty content
+  const handleLoad = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    const img = e.currentTarget;
+    if (img.naturalWidth < 50 || img.naturalHeight < 50) {
+      setHasError(true);
+    }
+  };
+
   return (
     /* eslint-disable-next-line @next/next/no-img-element */
     <img
@@ -123,6 +131,7 @@ export default function ProductImage({
       className={className}
       loading="lazy"
       onError={() => setHasError(true)}
+      onLoad={handleLoad}
     />
   );
 }

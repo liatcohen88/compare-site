@@ -39,7 +39,7 @@ export const MOCK_PRODUCTS: Product[] = [
       "אוזניות אלחוטיות עם ביטול רעשים אקטיבי, מצב שקיפות, אודיו מרחבי וקייס טעינה אלחוטי MagSafe.",
     category: "headphones",
     brand: "Apple",
-    imageUrl: "https://images.unsplash.com/photo-1606220588913-b3aacb4d2f37?w=800&q=80",
+    imageUrl: "",
     specs: {
       "ביטול רעשים": "אקטיבי (ANC)",
       "חיי סוללה": "עד 6 שעות",
@@ -172,7 +172,7 @@ export const MOCK_PRODUCTS: Product[] = [
     description: "אייפון 15 פרו עם שבב A17 Pro, מצלמה ראשית 48MP, גוף טיטניום ושיפורים בצילום וידאו ProRes.",
     category: "smartphones",
     brand: "Apple",
-    imageUrl: "https://images.unsplash.com/photo-1696446702183-be7f55ee4f76?w=800&q=80",
+    imageUrl: "",
     specs: {
       "מסך": "6.1 אינץ' Super Retina XDR",
       "מצלמה": "48MP + 12MP + 12MP",
@@ -342,7 +342,7 @@ export const MOCK_PRODUCTS: Product[] = [
     description: "עגילי כפתור עדינים מכסף סטרלינג 925 עם אבני זרקון מנצנצות. מתאים לכל יום וגם לאירועים.",
     category: "jewelry",
     brand: "Generic",
-    imageUrl: "https://images.unsplash.com/photo-1635767582909-345d3cca5e22?w=800&q=80",
+    imageUrl: "",
     specs: {
       "חומר": "כסף 925",
       "אבן": "זרקון CZ",
@@ -432,7 +432,7 @@ export const MOCK_PRODUCTS: Product[] = [
     description: "סט של 12 שפתונים נוזליים מאט עמידים לאורך כל היום. כל הגוונים שאת צריכה - מנוד עד אדום עז.",
     category: "beauty",
     brand: "Generic",
-    imageUrl: "https://images.unsplash.com/photo-1599733589046-9a8e21f5e2f9?w=800&q=80",
+    imageUrl: "",
     specs: {
       "כמות": "12 יחידות",
       "סוג": "נוזלי מאט",
@@ -477,7 +477,7 @@ export const MOCK_PRODUCTS: Product[] = [
     description: "מראת איפור הוליוודית עם 12 נורות LED, 3 רמות תאורה, מסך מגע לכוונון, ומעמד מסתובב 360°.",
     category: "beauty",
     brand: "Generic",
-    imageUrl: "https://images.unsplash.com/photo-1522335789203-aaa1f4f47cb6?w=800&q=80",
+    imageUrl: "",
     specs: {
       "מספר נורות": "12 LED",
       "רמות תאורה": "3",
@@ -826,7 +826,7 @@ export const MOCK_PRODUCTS: Product[] = [
     description: "סיר טיגון אוויר חכם עם מסך LCD, 8 תכניות מוכנות, טכנולוגיית 360° לבישול אחיד וללא שמן. בריא וטעים.",
     category: "kitchen",
     brand: "Generic",
-    imageUrl: "https://images.unsplash.com/photo-1648505126325-c8e1b0f6c8c7?w=800&q=80",
+    imageUrl: "",
     specs: { "נפח": "5 ליטר", "הספק": "1700W", "תכניות": "8", "מסך": "LCD מגע", "טמפ' מקס": "200°C" },
     offers: [
       { vendor: "aliexpress", price: 295, shippingPrice: 0, inStock: true, url: aliLink("airfryer"), lastUpdated: now },
@@ -859,7 +859,7 @@ export const MOCK_PRODUCTS: Product[] = [
     description: "מצלמת מעקב לתינוק עם רזולוציית Full HD, ראיית לילה, חיישן תנועה ובכי, אפליקציה לסמארטפון.",
     category: "baby",
     brand: "Generic",
-    imageUrl: "https://images.unsplash.com/photo-1607734834519-d8576ae60ea4?w=800&q=80",
+    imageUrl: "",
     specs: { "רזולוציה": "1080p Full HD", "ראיית לילה": "כן, אינפרא", "חיישנים": "תנועה + קול", "אפליקציה": "iOS + Android", "סיבוב": "Pan 355°/Tilt 110°" },
     offers: [
       { vendor: "aliexpress", price: 145, shippingPrice: 0, inStock: true, url: aliLink("baby-cam"), lastUpdated: now },
