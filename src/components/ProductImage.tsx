@@ -106,21 +106,25 @@ export default function ProductImage({
   category,
   brand,
 }: Props) {
-  const [hasError, setHasError] = useState(!src || src === "");
+  // Try proxy first → direct URL → placeholder
+  const [stage, setStage] = useState<"proxy" | "direct" | "fail">(
+    !src || src === "" ? "fail" : "proxy",
+  );
 
-  if (hasError || !src) {
+  if (stage === "fail" || !src) {
     return <BrandedPlaceholder category={category} brand={brand} className={className} />;
   }
 
-  // Use proxy for all external images for reliability
-  const finalSrc = proxyImage(src);
+  const finalSrc = stage === "proxy" ? proxyImage(src) : src;
 
-  // Detect broken images even when proxy returns 200 with empty content
+  const handleError = () => {
+    if (stage === "proxy") setStage("direct");
+    else setStage("fail");
+  };
+
   const handleLoad = (e: React.SyntheticEvent<HTMLImageElement>) => {
     const img = e.currentTarget;
-    if (img.naturalWidth < 50 || img.naturalHeight < 50) {
-      setHasError(true);
-    }
+    if (img.naturalWidth < 50 || img.naturalHeight < 50) handleError();
   };
 
   return (
@@ -130,8 +134,9 @@ export default function ProductImage({
       alt={alt}
       className={className}
       loading="lazy"
-      onError={() => setHasError(true)}
+      onError={handleError}
       onLoad={handleLoad}
+      referrerPolicy="no-referrer"
     />
   );
 }

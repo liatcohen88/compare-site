@@ -3,8 +3,8 @@ import { GENERATED_PRODUCTS } from "./generated-products";
 
 // Affiliate link helpers - point to working search URLs on each store
 function kspSearch(query: string): string {
-  // KSP affiliate landing URL (sets F15240AX tracking cookie + opens search)
-  return `https://ksp.co.il/item/F15240AX?search=${encodeURIComponent(query)}`;
+  // KSP's actual search URL (the canonical /?txt_search redirects here)
+  return `https://ksp.co.il/web/cat/?search=${encodeURIComponent(query)}`;
 }
 function amazonSearch(query: string): string {
   // Amazon search with hashveli-20 tag (direct ASIN URLs used where available)
@@ -174,7 +174,7 @@ export const MOCK_PRODUCTS: Product[] = [
     description: "אייפון 15 פרו עם שבב A17 Pro, מצלמה ראשית 48MP, גוף טיטניום ושיפורים בצילום וידאו ProRes.",
     category: "smartphones",
     brand: "Apple",
-    imageUrl: "",
+    imageUrl: "https://m.media-amazon.com/images/I/81dT7CUY6GL._AC_SL1500_.jpg",
     specs: {
       "מסך": "6.1 אינץ' Super Retina XDR",
       "מצלמה": "48MP + 12MP + 12MP",
@@ -344,7 +344,7 @@ export const MOCK_PRODUCTS: Product[] = [
     description: "עגילי כפתור עדינים מכסף סטרלינג 925 עם אבני זרקון מנצנצות. מתאים לכל יום וגם לאירועים.",
     category: "jewelry",
     brand: "Generic",
-    imageUrl: "",
+    imageUrl: "https://ae-pic-a1.aliexpress-media.com/kf/S75fab621a49d4b9c80e4e473a26eaa93e.jpg",
     specs: {
       "חומר": "כסף 925",
       "אבן": "זרקון CZ",
@@ -434,7 +434,7 @@ export const MOCK_PRODUCTS: Product[] = [
     description: "סט של 12 שפתונים נוזליים מאט עמידים לאורך כל היום. כל הגוונים שאת צריכה - מנוד עד אדום עז.",
     category: "beauty",
     brand: "Generic",
-    imageUrl: "",
+    imageUrl: "https://ae-pic-a1.aliexpress-media.com/kf/S090fca6d429c45f0ad375819b82e03d0z.jpg",
     specs: {
       "כמות": "12 יחידות",
       "סוג": "נוזלי מאט",
@@ -479,7 +479,7 @@ export const MOCK_PRODUCTS: Product[] = [
     description: "מראת איפור הוליוודית עם 12 נורות LED, 3 רמות תאורה, מסך מגע לכוונון, ומעמד מסתובב 360°.",
     category: "beauty",
     brand: "Generic",
-    imageUrl: "",
+    imageUrl: "https://ae-pic-a1.aliexpress-media.com/kf/Sd9f263dcf55042d9a7d8cd2c3ff0a785D.jpg",
     specs: {
       "מספר נורות": "12 LED",
       "רמות תאורה": "3",
@@ -828,7 +828,7 @@ export const MOCK_PRODUCTS: Product[] = [
     description: "סיר טיגון אוויר חכם עם מסך LCD, 8 תכניות מוכנות, טכנולוגיית 360° לבישול אחיד וללא שמן. בריא וטעים.",
     category: "kitchen",
     brand: "Generic",
-    imageUrl: "",
+    imageUrl: "https://ae-pic-a1.aliexpress-media.com/kf/S899b7f436dfc467490409cbe71e8635cI.jpg",
     specs: { "נפח": "5 ליטר", "הספק": "1700W", "תכניות": "8", "מסך": "LCD מגע", "טמפ' מקס": "200°C" },
     offers: [
       { vendor: "aliexpress", price: 295, shippingPrice: 0, inStock: true, url: aliLink("airfryer"), lastUpdated: now },
@@ -861,7 +861,7 @@ export const MOCK_PRODUCTS: Product[] = [
     description: "מצלמת מעקב לתינוק עם רזולוציית Full HD, ראיית לילה, חיישן תנועה ובכי, אפליקציה לסמארטפון.",
     category: "baby",
     brand: "Generic",
-    imageUrl: "",
+    imageUrl: "https://ae-pic-a1.aliexpress-media.com/kf/Sb5f8942e1da2483b9776f6c3c14439acM.jpg",
     specs: { "רזולוציה": "1080p Full HD", "ראיית לילה": "כן, אינפרא", "חיישנים": "תנועה + קול", "אפליקציה": "iOS + Android", "סיבוב": "Pan 355°/Tilt 110°" },
     offers: [
       { vendor: "aliexpress", price: 145, shippingPrice: 0, inStock: true, url: aliLink("baby-cam"), lastUpdated: now },
@@ -991,7 +991,7 @@ export const MOCK_PRODUCTS: Product[] = [
     id: "ipad-pro-m4", slug: "apple-ipad-pro-m4-11",
     title: 'Apple iPad Pro M4 11" 256GB', titleEn: "Apple iPad Pro M4 11 256GB",
     description: "ה-iPad הכי מתקדם עם שבב M4, מסך OLED Tandem ועיצוב הדק ביותר אי פעם.",
-    category: "laptops", brand: "Apple", imageUrl: "",
+    category: "laptops", brand: "Apple", imageUrl: "https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/ipad-pro-13-select-wifi-spaceblack-202405?wid=940&hei=1112&fmt=p-jpg",
     specs: { "שבב": "Apple M4", "מסך": '11" OLED Tandem', "אחסון": "256GB", "סוללה": "10 שעות" },
     offers: [
       { vendor: "ksp", price: 5290, shippingPrice: 0, inStock: true, url: "", vendorSku: "IPAD-PRO-M4-11", lastUpdated: now },

@@ -76,16 +76,44 @@ async function findImageForProduct(title) {
 const FILE = path.join(__dirname, "..", "src", "lib", "mock-data.ts");
 let content = fs.readFileSync(FILE, "utf8");
 
-// Match product objects with their title + imageUrl
-// Find pattern: title: "X", ... imageUrl: ""
-const productPattern = /(title:\s*['"`]([^'"`]+)['"`][^}]*?titleEn:\s*['"`]([^'"`]+)['"`][^}]*?imageUrl:\s*)"([^"]*)"/gs;
+// Match product objects with their title (titleEn optional) + imageUrl
+const productPattern = /title:\s*(['"`])([^'"`]+)\1[\s\S]{0,500}?imageUrl:\s*"([^"]*)"/g;
+
+const HE_TO_EN = {
+  "אוזניות": "headphones",
+  "סמארטפון": "smartphone",
+  "לפטופ": "laptop",
+  "טלוויזיה": "tv",
+  "שעון": "watch",
+  "מצלמה": "camera",
+  "תיק": "bag",
+  "נעליים": "shoes",
+  "שמלה": "dress",
+  "חולצה": "shirt",
+  "מכנסיים": "pants",
+  "בושם": "perfume",
+  "שפתון": "lipstick matte set",
+  "מראת איפור": "led vanity mirror makeup",
+  "עגילי": "silver earrings 925",
+  "סיר טיגון אוויר": "air fryer 5l digital",
+  "בייבי מוניטור": "baby monitor wifi 1080p camera",
+  "שעון יד מינימליסטי": "minimalist women watch mesh strap",
+};
+
+function translateTitle(title) {
+  for (const [he, en] of Object.entries(HE_TO_EN)) {
+    if (title.includes(he)) return en;
+  }
+  return title;
+}
 
 const updates = [];
 let m;
 while ((m = productPattern.exec(content)) !== null) {
-  const [full, prefix, title, titleEn, currentUrl] = m;
+  const [full, , title, currentUrl] = m;
   if (currentUrl === "") {
-    updates.push({ prefix, title, titleEn, fullMatch: full });
+    const titleEn = /[֐-׿]/.test(title) ? translateTitle(title) : title;
+    updates.push({ title, titleEn, fullMatch: full });
   }
 }
 
@@ -100,7 +128,7 @@ for (let i = 0; i < updates.length; i++) {
   const img = await findImageForProduct(u.titleEn);
   if (img) {
     const newMatch = u.fullMatch.replace(/imageUrl:\s*""/, `imageUrl: "${img}"`);
-    content = content.replace(u.fullMatch, newMatch);
+    content = content.split(u.fullMatch).join(newMatch);
     updated++;
     console.log("✓");
   } else {
