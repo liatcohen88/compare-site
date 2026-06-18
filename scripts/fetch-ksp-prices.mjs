@@ -34,30 +34,32 @@ async function searchKsp(query) {
 
 // MOCK_PRODUCTS we want to enrich with real KSP data.
 // Each entry: { id, queries } - queries tried in order until a match is found.
+// IDs must EXACTLY match MOCK_PRODUCTS ids in src/lib/mock-data.ts
 const TARGETS = [
   { id: "apple-airpods-pro-2", queries: ["AirPods Pro 2", "AirPods Pro USB-C"] },
-  { id: "apple-airpods-4", queries: ["AirPods 4"] },
   { id: "samsung-galaxy-s24-ultra", queries: ["Galaxy S24 Ultra"] },
   { id: "macbook-air-m3", queries: ["MacBook Air M3 13"] },
   { id: "iphone-15-pro", queries: ["iPhone 15 Pro 128"] },
-  { id: "sony-wh-1000xm5", queries: ["Sony WH-1000XM5"] },
-  { id: "bose-qc-ultra", queries: ["Bose QuietComfort Ultra"] },
-  { id: "bose-quietcomfort-ultra-headphones", queries: ["Bose QuietComfort Ultra"] },
+  { id: "sony-wh1000xm5", queries: ["Sony WH-1000XM5"] },
+  { id: "apple-watch-s9", queries: ["Apple Watch Series 9"] },
+  { id: "airpods-pro-2-usbc", queries: ["AirPods Pro USB-C"] },
+  { id: "airpods-4", queries: ["AirPods 4"] },
   { id: "apple-watch-s10", queries: ["Apple Watch Series 10"] },
   { id: "ipad-pro-m4", queries: ["iPad Pro M4 11"] },
-  { id: "samsung-galaxy-buds-3-pro", queries: ["Galaxy Buds 3 Pro"] },
-  { id: "jbl-flip-6", queries: ["JBL Flip 6"] },
+  { id: "samsung-buds-3-pro", queries: ["Galaxy Buds 3 Pro", "Galaxy Buds3"] },
+  { id: "bose-quietcomfort-ultra", queries: ["Bose QuietComfort Ultra"] },
+  { id: "jbl-flip-6", queries: ["JBL Flip 6", "JBL FLIP 7"] },
+  { id: "anker-soundcore-liberty-4", queries: ["Soundcore Liberty 4"] },
   { id: "logitech-mx-master-3s", queries: ["MX Master 3S"] },
-  { id: "ninja-air-fryer", queries: ["Ninja Air Fryer"] },
-  { id: "kindle-paperwhite", queries: ["Kindle Paperwhite"] },
+  { id: "stanley-quencher-tumbler", queries: ["Stanley Quencher"] },
+  { id: "ninja-air-fryer-af101", queries: ["Ninja Air Fryer AF101", "Ninja Air Fryer"] },
+  { id: "kindle-paperwhite-11", queries: ["Kindle Paperwhite"] },
   { id: "dyson-v15-detect", queries: ["Dyson V15"] },
+  { id: "philips-sonicare-diamondclean", queries: ["Philips Sonicare DiamondClean", "Philips Sonicare"] },
   { id: "garmin-forerunner-265", queries: ["Garmin Forerunner 265"] },
   { id: "fitbit-charge-6", queries: ["Fitbit Charge 6"] },
-  { id: "gopro-hero-12", queries: ["GoPro Hero 12"] },
+  { id: "gopro-hero-12", queries: ["GoPro Hero 12", "GoPro HERO12"] },
   { id: "echo-dot-5", queries: ["Echo Dot"] },
-  { id: "stanley-quencher-tumbler", queries: ["Stanley Quencher"] },
-  { id: "anker-soundcore-liberty-4", queries: ["Soundcore Liberty 4"] },
-  { id: "philips-sonicare", queries: ["Philips Sonicare"] },
 ];
 
 // Accessory/case/cover keywords - reject these matches (we want the real product)
