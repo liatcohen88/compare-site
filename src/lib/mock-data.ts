@@ -951,43 +951,39 @@ export const MOCK_PRODUCTS: Product[] = [
   },
 ];
 
-// Auto-fix all URLs in ALL products (MOCK + GENERATED) to use search-based affiliate links
-function fixProductLinks(products: Product[]) {
+// Auto-fix MOCK_PRODUCTS URLs to use real search URLs based on English title
+// MOCK_PRODUCTS are curated popular products that exist in multiple stores
+function fixMockProductLinks(products: Product[]) {
   for (const p of products) {
     const q = p.titleEn || p.title;
-
-    // Fix existing offers
     for (const offer of p.offers) {
-      if (offer.vendor === "ksp") offer.url = kspSearch(q);
-      else if (offer.vendor === "amazon") offer.url = amazonSearch(q);
-      else if (offer.vendor === "aliexpress") offer.url = aliSearch(q);
-      else if (offer.vendor === "shein") offer.url = sheinSearch(q);
-    }
-
-    // Add SHEIN offer to every product that doesn't have one
-    const hasShein = p.offers.some((o) => o.vendor === "shein");
-    if (!hasShein) {
-      const cheapestPrice = Math.min(
-        ...p.offers.filter((o) => o.inStock).map((o) => o.price + o.shippingPrice),
-      );
-      // Shein is usually 40-60% of cheapest competitor for fashion/beauty
-      const sheinEstimate = Math.round(cheapestPrice * 0.55);
-      p.offers.push({
-        vendor: "shein",
-        price: sheinEstimate,
-        shippingPrice: 25,
-        inStock: true,
-        url: sheinSearch(q),
-        lastUpdated: "2026-06-09T00:00:00Z",
-      });
+      // For Amazon - use REAL ASIN if we have it, otherwise search
+      if (offer.vendor === "amazon" && offer.vendorSku && /^B0[A-Z0-9]{8}$/.test(offer.vendorSku)) {
+        offer.url = `https://www.amazon.com/dp/${offer.vendorSku}?tag=hashveli-20`;
+      } else if (offer.vendor === "amazon") {
+        offer.url = amazonSearch(q);
+      } else if (offer.vendor === "ksp") {
+        offer.url = kspSearch(q);
+      } else if (offer.vendor === "aliexpress") {
+        offer.url = aliSearch(q);
+      } else if (offer.vendor === "shein") {
+        offer.url = sheinSearch(q);
+      }
     }
   }
 }
 
-fixProductLinks(MOCK_PRODUCTS);
+// Strip fake comparison offers from AliExpress products
+// They were random multipliers - keep ONLY the real AliExpress link
+function aliExpressOnly(products: Product[]) {
+  for (const p of products) {
+    // Keep only the AliExpress offer (it's the real one with real promotion link)
+    p.offers = p.offers.filter((o) => o.vendor === "aliexpress");
+  }
+}
 
-// Also fix generated products + add Shein to them
-fixProductLinks(GENERATED_PRODUCTS);
+fixMockProductLinks(MOCK_PRODUCTS);
+aliExpressOnly(GENERATED_PRODUCTS);
 
 // Real products (from AliExpress API) + curated mock products (with KSP/Amazon)
 const ALL_PRODUCTS: Product[] = [...MOCK_PRODUCTS, ...GENERATED_PRODUCTS];
