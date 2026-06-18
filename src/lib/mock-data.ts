@@ -40,7 +40,7 @@ export const MOCK_PRODUCTS: Product[] = [
       "אוזניות אלחוטיות עם ביטול רעשים אקטיבי, מצב שקיפות, אודיו מרחבי וקייס טעינה אלחוטי MagSafe.",
     category: "headphones",
     brand: "Apple",
-    imageUrl: "",
+    imageUrl: "https://ae-pic-a1.aliexpress-media.com/kf/Sdadca76e6fca4922b6d379f4777f59bc3.jpg",
     specs: {
       "ביטול רעשים": "אקטיבי (ANC)",
       "חיי סוללה": "עד 6 שעות",
@@ -954,7 +954,7 @@ export const MOCK_PRODUCTS: Product[] = [
     id: "airpods-pro-2-usbc", slug: "apple-airpods-pro-2-usbc",
     title: "Apple AirPods Pro 2 (USB-C)", titleEn: "Apple AirPods Pro 2 USB-C",
     description: "הדור החדש של AirPods Pro עם USB-C, ביטול רעשים אקטיבי משופר ושמע מרחבי.",
-    category: "headphones", brand: "Apple", imageUrl: "",
+    category: "headphones", brand: "Apple", imageUrl: "https://ae-pic-a1.aliexpress-media.com/kf/S072de941aca44bd9a506ae0928a6afdby.jpg",
     specs: { "חיבור": "USB-C", "ANC": "כן (משופר)", "סוללה": "6 שעות + קייס 30 שעות", "MagSafe": "כן" },
     offers: [
       { vendor: "ksp", price: 949, shippingPrice: 0, inStock: true, url: "", vendorSku: "AIRPODS-USBC", lastUpdated: now },
@@ -966,7 +966,7 @@ export const MOCK_PRODUCTS: Product[] = [
     id: "airpods-4", slug: "apple-airpods-4",
     title: "Apple AirPods 4", titleEn: "Apple AirPods 4",
     description: "AirPods 4 - אוזניות פתוחות בעיצוב חדש עם איכות שמע משופרת.",
-    category: "headphones", brand: "Apple", imageUrl: "",
+    category: "headphones", brand: "Apple", imageUrl: "https://ae-pic-a1.aliexpress-media.com/kf/S168d34f77e444adbb8725738dc5c657d2.png",
     specs: { "סוללה": "5 שעות + קייס 30 שעות", "MagSafe": "כן", "ANC": "לא (גרסה ללא ANC)" },
     offers: [
       { vendor: "ksp", price: 649, shippingPrice: 0, inStock: true, url: "", vendorSku: "AIRPODS-4", lastUpdated: now },
@@ -978,7 +978,7 @@ export const MOCK_PRODUCTS: Product[] = [
     id: "apple-watch-s10", slug: "apple-watch-series-10",
     title: "Apple Watch Series 10 (46mm)", titleEn: "Apple Watch Series 10 46mm",
     description: "השעון החכם המתקדם של אפל עם מסך גדול יותר, חיישנים משופרים וסוללה ל-18 שעות.",
-    category: "smartwatches", brand: "Apple", imageUrl: "",
+    category: "smartwatches", brand: "Apple", imageUrl: "https://ae-pic-a1.aliexpress-media.com/kf/S07b07a5924b1407780d131a2a5eeab35u.jpg",
     specs: { "גודל": "46mm", "מסך": "Always-On Retina", "סוללה": "18 שעות", "GPS": "כן" },
     offers: [
       { vendor: "ksp", price: 1990, shippingPrice: 0, inStock: true, url: "", vendorSku: "AW10-46", lastUpdated: now },
@@ -1002,7 +1002,7 @@ export const MOCK_PRODUCTS: Product[] = [
     id: "samsung-buds-3-pro", slug: "samsung-galaxy-buds-3-pro",
     title: "Samsung Galaxy Buds 3 Pro", titleEn: "Samsung Galaxy Buds 3 Pro",
     description: "האוזניות האלחוטיות המתקדמות של סמסונג עם ANC, Hi-Fi 24bit ועיצוב חדש לחלוטין.",
-    category: "headphones", brand: "Samsung", imageUrl: "",
+    category: "headphones", brand: "Samsung", imageUrl: "https://ae-pic-a1.aliexpress-media.com/kf/S1e2039f11fb24df493fed60bdcba76f3o.jpg",
     specs: { "ANC": "מתקדם", "שמע": "Hi-Fi 24bit", "סוללה": "7 שעות + קייס 24 שעות", "Wireless Charging": "כן" },
     offers: [
       { vendor: "ksp", price: 990, shippingPrice: 0, inStock: true, url: "", vendorSku: "BUDS3PRO", lastUpdated: now },
@@ -1015,7 +1015,7 @@ export const MOCK_PRODUCTS: Product[] = [
     id: "bose-quietcomfort-ultra", slug: "bose-quietcomfort-ultra",
     title: "Bose QuietComfort Ultra Headphones", titleEn: "Bose QuietComfort Ultra Headphones",
     description: "אוזניות עוטפות אוזן מבוס - ביטול רעשים אגדי, שמע Immersive ונוחות יוצאת דופן.",
-    category: "headphones", brand: "Bose", imageUrl: "",
+    category: "headphones", brand: "Bose", imageUrl: "https://ae-pic-a1.aliexpress-media.com/kf/Sfeec640e527948c78f07a84ca09e6b71s.jpg",
     specs: { "ANC": "Bose Best-in-Class", "שמע": "Immersive Audio", "סוללה": "24 שעות", "Bluetooth": "5.3" },
     offers: [
       { vendor: "ksp", price: 1990, shippingPrice: 0, inStock: true, url: "", vendorSku: "BOSE-QC-ULTRA", lastUpdated: now },
@@ -1027,7 +1027,7 @@ export const MOCK_PRODUCTS: Product[] = [
     id: "jbl-flip-6", slug: "jbl-flip-6",
     title: "רמקול JBL Flip 6 נייד", titleEn: "JBL Flip 6 Portable Speaker",
     description: "רמקול בלוטות' נייד מ-JBL עם 12 שעות סוללה, עמיד למים IP67 ושמע חזק וצלול.",
-    category: "headphones", brand: "JBL", imageUrl: "",
+    category: "headphones", brand: "JBL", imageUrl: "https://ae-pic-a1.aliexpress-media.com/kf/S29a0ad468e5740a6a521d90fac1fe7c9D.jpg",
     specs: { "סוללה": "12 שעות", "עמידות": "IP67", "Bluetooth": "5.1", "משקל": "550 גרם" },
     offers: [
       { vendor: "ksp", price: 549, shippingPrice: 0, inStock: true, url: "", vendorSku: "JBL-FLIP6", lastUpdated: now },
@@ -1040,7 +1040,7 @@ export const MOCK_PRODUCTS: Product[] = [
     id: "anker-soundcore-liberty-4", slug: "anker-soundcore-liberty-4",
     title: "אוזניות Anker Soundcore Liberty 4", titleEn: "Anker Soundcore Liberty 4",
     description: "אוזניות אלחוטיות אמיתיות עם ANC ושמע איכותי במחיר חצי מהמתחרים.",
-    category: "headphones", brand: "Anker", imageUrl: "",
+    category: "headphones", brand: "Anker", imageUrl: "https://ae-pic-a1.aliexpress-media.com/kf/S6cae813b7f1d46a79ee37a1d020080c3e.jpg",
     specs: { "ANC": "כן", "סוללה": "9 שעות + קייס 28 שעות", "Bluetooth": "5.3", "Hi-Res": "כן" },
     offers: [
       { vendor: "amazon", price: 490, shippingPrice: 60, inStock: true, url: "", vendorSku: "B0BVKJX6SN", lastUpdated: now },
@@ -1052,7 +1052,7 @@ export const MOCK_PRODUCTS: Product[] = [
     id: "logitech-mx-master-3s", slug: "logitech-mx-master-3s",
     title: "עכבר Logitech MX Master 3S", titleEn: "Logitech MX Master 3S",
     description: "עכבר העבודה המוביל בעולם - דיוק 8K DPI, גלגלת MagSpeed, חיבור ל-3 מכשירים.",
-    category: "office", brand: "Logitech", imageUrl: "",
+    category: "office", brand: "Logitech", imageUrl: "https://ae-pic-a1.aliexpress-media.com/kf/S13d69cdb166d4345b24c7d9b85571e4et.jpg",
     specs: { "DPI": "8000", "סוללה": "70 ימים", "חיבור": "Bluetooth + USB-C", "מכשירים": "3 במקביל" },
     offers: [
       { vendor: "ksp", price: 599, shippingPrice: 0, inStock: true, url: "", vendorSku: "MX-MASTER-3S", lastUpdated: now },
@@ -1065,7 +1065,7 @@ export const MOCK_PRODUCTS: Product[] = [
     id: "stanley-quencher-tumbler", slug: "stanley-quencher-h2-o-flowstate",
     title: "כוס Stanley Quencher H2.0 FlowState 1.18L", titleEn: "Stanley Quencher H2.0 FlowState",
     description: "הכוס הוויראלית של סטנלי - שומרת קר 11 שעות, חם 7 שעות, קר בקרח 2 ימים.",
-    category: "kitchen", brand: "Stanley", imageUrl: "",
+    category: "kitchen", brand: "Stanley", imageUrl: "https://ae-pic-a1.aliexpress-media.com/kf/S01e5264af5b1423999103ee45a82067dh.jpg",
     specs: { "נפח": "1.18 ליטר (40oz)", "קר": "11 שעות", "חם": "7 שעות", "חומר": "נירוסטה" },
     offers: [
       { vendor: "amazon", price: 189, shippingPrice: 50, inStock: true, url: "", vendorSku: "B0B9TM7M7P", lastUpdated: now },
@@ -1077,7 +1077,7 @@ export const MOCK_PRODUCTS: Product[] = [
     id: "ninja-air-fryer-af101", slug: "ninja-air-fryer-af101",
     title: "סיר טיגון אוויר Ninja AF101 4L", titleEn: "Ninja Air Fryer AF101",
     description: "סיר טיגון האוויר המוביל באמזון - 4 ליטר, 4 פונקציות, עיצוב קומפקטי.",
-    category: "kitchen", brand: "Ninja", imageUrl: "",
+    category: "kitchen", brand: "Ninja", imageUrl: "https://ae-pic-a1.aliexpress-media.com/kf/S5f1cf58ba5ba45f995eb00cd0006376f5.jpg",
     specs: { "נפח": "4 ליטר", "הספק": "1550W", "פונקציות": "4 (Air Fry, Roast, Reheat, Dehydrate)", "טמפ' מקס": "200°C" },
     offers: [
       { vendor: "ksp", price: 599, shippingPrice: 0, inStock: true, url: "", vendorSku: "NINJA-AF101", lastUpdated: now },
@@ -1089,7 +1089,7 @@ export const MOCK_PRODUCTS: Product[] = [
     id: "kindle-paperwhite-11", slug: "amazon-kindle-paperwhite-11-gen",
     title: "Amazon Kindle Paperwhite (דור 11)", titleEn: "Amazon Kindle Paperwhite 11th Gen",
     description: "קורא הספרים האלקטרוני המוביל בעולם - מסך 6.8 אינץ', עמיד למים, סוללה 10 שבועות.",
-    category: "books", brand: "Amazon", imageUrl: "",
+    category: "books", brand: "Amazon", imageUrl: "https://ae-pic-a1.aliexpress-media.com/kf/Sda97d2e8675442fbaf809254a80a073cB.jpg",
     specs: { "מסך": '6.8" E Ink', "אחסון": "16GB", "עמיד למים": "IPX8", "סוללה": "10 שבועות" },
     offers: [
       { vendor: "amazon", price: 549, shippingPrice: 80, inStock: true, url: "", vendorSku: "B08KTZ8249", lastUpdated: now },
@@ -1101,7 +1101,7 @@ export const MOCK_PRODUCTS: Product[] = [
     id: "dyson-v15-detect", slug: "dyson-v15-detect-cordless-vacuum",
     title: "שואב אבק אלחוטי Dyson V15 Detect", titleEn: "Dyson V15 Detect Cordless Vacuum",
     description: "שואב האבק האלחוטי המתקדם בעולם - לייזר שמראה אבק, מסך LCD, 60 דקות עבודה.",
-    category: "home", brand: "Dyson", imageUrl: "",
+    category: "home", brand: "Dyson", imageUrl: "https://ae-pic-a1.aliexpress-media.com/kf/S4a0de3b2482946f0978439fcb6e7a894f.jpg",
     specs: { "סוללה": "60 דקות", "כוח שאיבה": "230AW", "פילטר": "HEPA", "כולל": "6 מברשות" },
     offers: [
       { vendor: "ksp", price: 3490, shippingPrice: 0, inStock: true, url: "", vendorSku: "DYSON-V15", lastUpdated: now },
@@ -1113,7 +1113,7 @@ export const MOCK_PRODUCTS: Product[] = [
     id: "philips-sonicare-diamondclean", slug: "philips-sonicare-diamondclean",
     title: "מברשת שיניים חשמלית Philips Sonicare DiamondClean", titleEn: "Philips Sonicare DiamondClean",
     description: "מברשת שיניים סוניק מקצועית עם 5 מצבי ניקוי וחיישנים חכמים.",
-    category: "beauty", brand: "Philips", imageUrl: "",
+    category: "beauty", brand: "Philips", imageUrl: "https://ae-pic-a1.aliexpress-media.com/kf/S4313542897a1421f82f13044bcdc1826b.jpg",
     specs: { "מצבים": "5", "סוללה": "14 ימים", "טעינה": "אלחוטית", "כולל": "3 ראשים + נרתיק" },
     offers: [
       { vendor: "ksp", price: 999, shippingPrice: 0, inStock: true, url: "", vendorSku: "SONICARE-DC", lastUpdated: now },
@@ -1126,7 +1126,7 @@ export const MOCK_PRODUCTS: Product[] = [
     id: "garmin-forerunner-265", slug: "garmin-forerunner-265",
     title: "שעון ספורט Garmin Forerunner 265", titleEn: "Garmin Forerunner 265",
     description: "שעון GPS לרצים עם מסך AMOLED, מדדי כושר מתקדמים וסוללה ל-13 ימים.",
-    category: "smartwatches", brand: "Garmin", imageUrl: "",
+    category: "smartwatches", brand: "Garmin", imageUrl: "https://ae-pic-a1.aliexpress-media.com/kf/Sd471eddecc914e47bd78dc1039d22b307.jpg",
     specs: { "מסך": "AMOLED", "GPS": "Multi-Band", "סוללה": "13 ימים", "Music": "כן" },
     offers: [
       { vendor: "ksp", price: 1990, shippingPrice: 0, inStock: true, url: "", vendorSku: "GARMIN-265", lastUpdated: now },
@@ -1138,7 +1138,7 @@ export const MOCK_PRODUCTS: Product[] = [
     id: "fitbit-charge-6", slug: "fitbit-charge-6",
     title: "צמיד פעילות Fitbit Charge 6", titleEn: "Fitbit Charge 6",
     description: "צמיד הכושר המוביל - מד דופק, ECG, GPS, 7 ימי סוללה ואפליקציות גוגל.",
-    category: "smartwatches", brand: "Fitbit", imageUrl: "",
+    category: "smartwatches", brand: "Fitbit", imageUrl: "https://ae-pic-a1.aliexpress-media.com/kf/Sbad66bae463a45a7a5a3df542ad55e4dH.jpg",
     specs: { "סוללה": "7 ימים", "GPS": "Built-in", "ECG": "כן", "עמיד למים": "50m" },
     offers: [
       { vendor: "ksp", price: 549, shippingPrice: 0, inStock: true, url: "", vendorSku: "FITBIT-C6", lastUpdated: now },
@@ -1151,7 +1151,7 @@ export const MOCK_PRODUCTS: Product[] = [
     id: "gopro-hero-12", slug: "gopro-hero-12-black",
     title: "מצלמת אקסטרים GoPro Hero 12 Black", titleEn: "GoPro Hero 12 Black",
     description: "המצלמה הכי מתקדמת של גופרו - וידאו 5.3K, ייצוב HyperSmooth 6.0 וצילום HDR.",
-    category: "phone-accessories", brand: "GoPro", imageUrl: "",
+    category: "phone-accessories", brand: "GoPro", imageUrl: "https://ae-pic-a1.aliexpress-media.com/kf/See457ce5747847c681a8fb11e501daddH.jpg",
     specs: { "וידאו": "5.3K @ 60fps", "ייצוב": "HyperSmooth 6.0", "עמידות למים": "10m", "סוללה": "Enduro 1720mAh" },
     offers: [
       { vendor: "ksp", price: 1890, shippingPrice: 0, inStock: true, url: "", vendorSku: "GOPRO-H12", lastUpdated: now },
@@ -1163,7 +1163,7 @@ export const MOCK_PRODUCTS: Product[] = [
     id: "echo-dot-5", slug: "amazon-echo-dot-5-gen",
     title: "Amazon Echo Dot (דור 5)", titleEn: "Amazon Echo Dot 5th Gen",
     description: "רמקול חכם של אמזון עם Alexa - שמע משופר, חיישני טמפ' ובקרת בית חכם.",
-    category: "smart-home", brand: "Amazon", imageUrl: "",
+    category: "smart-home", brand: "Amazon", imageUrl: "https://ae-pic-a1.aliexpress-media.com/kf/Sff0b9e4013f34ed2ae35ef1cc12257f86.jpg",
     specs: { "Alexa": "כן", "חיישנים": "טמפ' + תנועה", "בית חכם": "מובנה", "צבעים": "כחול, שחור, לבן" },
     offers: [
       { vendor: "amazon", price: 189, shippingPrice: 50, inStock: true, url: "", vendorSku: "B09B8X9RGM", lastUpdated: now },
