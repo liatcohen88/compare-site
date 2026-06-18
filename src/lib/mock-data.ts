@@ -1,9 +1,11 @@
 import type { Product } from "./types";
 import { GENERATED_PRODUCTS } from "./generated-products";
 import KSP_PRODUCTS from "./ksp-products.json";
+import AMAZON_VERIFIED from "./amazon-verified.json";
 
 type KspEntry = { uin: number; name: string; price: number; img: string; url: string };
 const KSP_MAP = KSP_PRODUCTS as Record<string, KspEntry>;
+const SHIPPABLE_ASINS = new Set<string>((AMAZON_VERIFIED as { shippable: string[] }).shippable);
 
 // Affiliate link helpers - point to working search URLs on each store
 function kspSearch(query: string): string {
@@ -1189,7 +1191,8 @@ function fixMockProductLinks(products: Product[]) {
   for (const p of products) {
     p.offers = p.offers.filter((offer) => {
       if (offer.vendor === "amazon") {
-        if (offer.vendorSku && /^B0[A-Z0-9]{8}$/.test(offer.vendorSku)) {
+        // Only keep Amazon offers verified live as shipping to Israel
+        if (offer.vendorSku && SHIPPABLE_ASINS.has(offer.vendorSku)) {
           offer.url = `https://www.amazon.com/dp/${offer.vendorSku}?tag=hashveli-20`;
           return true;
         }

@@ -1,0 +1,42 @@
+{
+  "_meta": {
+    "checked": "2026-06-18",
+    "method": "Real-browser check on amazon.com from Israeli address (Beni Brak)",
+    "shippableCount": 1,
+    "totalChecked": 25,
+    "notes": "Only ASINs verified live in browser as shipping to Israel are listed. All others removed from Amazon offers."
+  },
+  "shippable": [
+    "B0CHX1W1XY"
+  ],
+  "notShippable": [
+    "B0BDHWDR12",
+    "B0CMDRCZBJ",
+    "B09XS7JWHH",
+    "B0CHWRXH8B",
+    "B08KTZ8249",
+    "B0CX23V2ZK"
+  ],
+  "wrongProduct": [
+    "B0CHX3QBCH",
+    "B0CL61F39H"
+  ],
+  "pageNotFound": [
+    "B0DGW8ZX6V",
+    "B0DGS6WDC9",
+    "B0CT8HDDPS",
+    "B0D2GV1HW9",
+    "B0CCZ1L2KH",
+    "B09FRBQQNY",
+    "B0BVKJX6SN",
+    "B0B12Z9NPS",
+    "B0B9TM7M7P",
+    "B07X3LZJW3",
+    "B08V1JG3CT",
+    "B07J6HLNFC",
+    "B0BVPKR4FX",
+    "B0CCNTSC7F",
+    "B0CGB5C8M5",
+    "B09B8X9RGM"
+  ]
+}
