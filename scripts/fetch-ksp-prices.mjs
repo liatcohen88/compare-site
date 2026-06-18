@@ -32,6 +32,27 @@ async function searchKsp(query) {
   return json?.result?.items ?? [];
 }
 
+// Fetches the real selling price (min_price) from the item detail endpoint.
+// Search endpoint returns the listed price - not the active sale price.
+async function getRealPrice(uin) {
+  try {
+    const res = await fetch(`https://ksp.co.il/m_action/api/item/${uin}`, {
+      headers: HEADERS,
+    });
+    if (!res.ok) return null;
+    const json = await res.json();
+    const data = json?.result?.data;
+    if (!data) return null;
+    // min_price is the active sale price; price is the listed/original.
+    return {
+      price: Number(data.min_price) || Number(data.price) || null,
+      original: Number(data.price) || null,
+    };
+  } catch {
+    return null;
+  }
+}
+
 // MOCK_PRODUCTS we want to enrich with real KSP data.
 // Each entry: { id, queries } - queries tried in order until a match is found.
 // IDs must EXACTLY match MOCK_PRODUCTS ids in src/lib/mock-data.ts
@@ -116,15 +137,21 @@ for (const target of TARGETS) {
   }
 
   if (match) {
+    const real = await getRealPrice(match.uin);
+    const finalPrice = real?.price ?? match.price;
+    const orig = real?.original && real.original !== finalPrice ? real.original : null;
     results[target.id] = {
       uin: match.uin,
       name: match.name,
-      price: match.price,
+      price: finalPrice,
+      originalPrice: orig,
       img: match.img,
       url: `https://ksp.co.il/web/item/${match.uin}?af=${KSP_AFFILIATE}`,
     };
     found++;
-    console.log(`✓ ${target.id} → ${match.uin} | ₪${match.price} | ${match.name.slice(0, 60)}`);
+    const tag = orig ? `₪${finalPrice} (was ₪${orig})` : `₪${finalPrice}`;
+    console.log(`✓ ${target.id} → ${match.uin} | ${tag} | ${match.name.slice(0, 55)}`);
+    await new Promise((r) => setTimeout(r, 200));
   } else {
     missing++;
     console.log(`✗ ${target.id} (no match)`);

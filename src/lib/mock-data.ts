@@ -3,7 +3,7 @@ import { GENERATED_PRODUCTS } from "./generated-products";
 import KSP_PRODUCTS from "./ksp-products.json";
 import AMAZON_VERIFIED from "./amazon-verified.json";
 
-type KspEntry = { uin: number; name: string; price: number; img: string; url: string };
+type KspEntry = { uin: number; name: string; price: number; originalPrice?: number | null; img: string; url: string };
 const KSP_MAP = KSP_PRODUCTS as Record<string, KspEntry>;
 const SHIPPABLE_ASINS = new Set<string>((AMAZON_VERIFIED as { shippable: string[] }).shippable);
 
@@ -1215,6 +1215,7 @@ function fixMockProductLinks(products: Product[]) {
       p.offers.push({
         vendor: "ksp",
         price: ksp.price,
+        ...(ksp.originalPrice ? { originalPrice: ksp.originalPrice } : {}),
         shippingPrice: 0,
         inStock: true,
         url: ksp.url,

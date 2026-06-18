@@ -3,6 +3,7 @@ import type { VendorId, CategorySlug } from "./config";
 export interface VendorOffer {
   vendor: VendorId;
   price: number;
+  originalPrice?: number;
   shippingPrice: number;
   inStock: boolean;
   url: string;

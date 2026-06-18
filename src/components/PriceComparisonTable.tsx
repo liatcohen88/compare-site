@@ -153,7 +153,16 @@ export default function PriceComparisonTable({ offers }: Props) {
                     )}
                   </td>
                   <td className="p-4 font-semibold text-slate-900 numeric">
-                    {formatPrice(offer.price)}
+                    {offer.originalPrice && offer.originalPrice > offer.price ? (
+                      <span className="flex items-baseline gap-2">
+                        <span className="text-red-600">{formatPrice(offer.price)}</span>
+                        <span className="text-xs text-slate-400 line-through">
+                          {formatPrice(offer.originalPrice)}
+                        </span>
+                      </span>
+                    ) : (
+                      formatPrice(offer.price)
+                    )}
                   </td>
                   <td className="p-4 font-bold text-blue-600 numeric">
                     {formatPrice(total)}

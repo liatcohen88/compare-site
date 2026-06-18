@@ -2,7 +2,8 @@
   "apple-airpods-pro-2": {
     "uin": 410052,
     "name": "אוזניות אלחוטיות Apple AirPods Pro 3 - כולל מארז עם טעינה אלחוטית MagSafe וחיבור USB-C",
-    "price": 889,
+    "price": 429,
+    "originalPrice": 889,
     "img": "https://ksp.co.il/shop/items/410052.jpg?v=5",
     "url": "https://ksp.co.il/web/item/410052?af=F15240AX"
   },
@@ -10,6 +11,7 @@
     "uin": 383223,
     "name": "טלפון סלולרי Samsung Galaxy S25 Ultra 12GB+256GB (SM-S938B / DS) - צבע שחור טיטניום - שנתיים אחריות",
     "price": 3179,
+    "originalPrice": null,
     "img": "https://ksp.co.il/shop/items/383223.jpg?v=5",
     "url": "https://ksp.co.il/web/item/383223?af=F15240AX"
   },
@@ -17,20 +19,23 @@
     "uin": 211968,
     "name": "אוזניות קשת Over-Ear אלחוטיות עם ביטול רעשים Sony WH-1000XM5S ANC - צבע כסוף",
     "price": 979,
+    "originalPrice": null,
     "img": "https://ksp.co.il/shop/items/211968.jpg?v=5",
     "url": "https://ksp.co.il/web/item/211968?af=F15240AX"
   },
   "apple-watch-s9": {
     "uin": 411410,
     "name": "שעון חכם Apple Watch 46mm Series 11 GPS + Cellular צבע שעון Silver Aluminium צבע רצועה Purple Fog Sport Band גודל רצועה S / M",
-    "price": 2049,
+    "price": 1649,
+    "originalPrice": 2049,
     "img": "https://ksp.co.il/shop/items/411410.jpg?v=5",
     "url": "https://ksp.co.il/web/item/411410?af=F15240AX"
   },
   "airpods-pro-2-usbc": {
     "uin": 410052,
     "name": "אוזניות אלחוטיות Apple AirPods Pro 3 - כולל מארז עם טעינה אלחוטית MagSafe וחיבור USB-C",
-    "price": 889,
+    "price": 429,
+    "originalPrice": 889,
     "img": "https://ksp.co.il/shop/items/410052.jpg?v=5",
     "url": "https://ksp.co.il/web/item/410052?af=F15240AX"
   },
@@ -38,6 +43,7 @@
     "uin": 411281,
     "name": "שעון חכם Apple Watch 42mm Series 11 GPS צבע שעון Rose Gold Aluminium צבע רצועה Light Blush Sport Band גודל רצועה M / L",
     "price": 1390,
+    "originalPrice": null,
     "img": "https://ksp.co.il/shop/items/411281.jpg?v=5",
     "url": "https://ksp.co.il/web/item/411281?af=F15240AX"
   },
@@ -45,6 +51,7 @@
     "uin": 463682,
     "name": "אוזניות אלחוטיות Samsung Galaxy Buds3 FE SM-R420 - צבע אפור - שנה אחריות ",
     "price": 299,
+    "originalPrice": null,
     "img": "https://ksp.co.il/shop/items/463682.jpg?v=5",
     "url": "https://ksp.co.il/web/item/463682?af=F15240AX"
   },
@@ -52,6 +59,7 @@
     "uin": 421663,
     "name": "אוזניות Over-Ear‏ אלחוטיות עם ביטול רעשים Bose QuietComfort Ultra 2nd Gen - צבע שחור",
     "price": 1389,
+    "originalPrice": null,
     "img": "https://ksp.co.il/shop/items/421663.jpg?v=5",
     "url": "https://ksp.co.il/web/item/421663?af=F15240AX"
   },
@@ -59,6 +67,7 @@
     "uin": 406097,
     "name": "רמקול Bluetooth נייד JBL FLIP 7 - צבע שחור",
     "price": 344,
+    "originalPrice": null,
     "img": "https://ksp.co.il/shop/items/406097.jpg?v=5",
     "url": "https://ksp.co.il/web/item/406097?af=F15240AX"
   },
@@ -66,13 +75,15 @@
     "uin": 308637,
     "name": "אוזניות תוך-אוזן Soundcore Liberty 4 NC True Wireless - צבע לבן",
     "price": 289,
+    "originalPrice": null,
     "img": "https://ksp.co.il/shop/items/308637.jpg?v=5",
     "url": "https://ksp.co.il/web/item/308637?af=F15240AX"
   },
   "logitech-mx-master-3s": {
     "uin": 228717,
     "name": "עכבר אלחוטי MX Master 3S עבור Mac מבית Logitech - צבע Space Gray",
-    "price": 399,
+    "price": 279,
+    "originalPrice": 399,
     "img": "https://ksp.co.il/shop/items/228717.jpg?v=5",
     "url": "https://ksp.co.il/web/item/228717?af=F15240AX"
   },
@@ -80,6 +91,7 @@
     "uin": 467301,
     "name": "סיר טיגון ללא שמן Ninja Air Fryer 3.8L 1550W AF100EU - שנה אחריות",
     "price": 379,
+    "originalPrice": null,
     "img": "https://ksp.co.il/shop/items/467301.jpg?v=5",
     "url": "https://ksp.co.il/web/item/467301?af=F15240AX"
   },
@@ -87,13 +99,15 @@
     "uin": 287264,
     "name": "שואב אבק אלחוטי Dyson V15s Detect Submarine - שלוש שנות אחריות",
     "price": 2299,
+    "originalPrice": null,
     "img": "https://ksp.co.il/shop/items/287264.jpg?v=5",
     "url": "https://ksp.co.il/web/item/287264?af=F15240AX"
   },
   "philips-sonicare-diamondclean": {
     "uin": 466644,
     "name": "ראש מברשת להלבנה Philips Sonicare W2 Optimal White - צבע לבן - 6 יחידות - דגם HX6066 / 87",
-    "price": 189,
+    "price": 119,
+    "originalPrice": 189,
     "img": "https://ksp.co.il/shop/items/466644.jpg?v=5",
     "url": "https://ksp.co.il/web/item/466644?af=F15240AX"
   },
@@ -101,6 +115,7 @@
     "uin": 250638,
     "name": "שעון ריצה חכם Garmin Forerunner 265 Music GPS 46mm - צבע שחור עם רצועת סיליקון בצבעי שחור / Powder Gray - כולל תמיכה מלאה בעברית - שנתיים אחריות יבואן רשמי על ידי רונלייט",
     "price": 1829,
+    "originalPrice": null,
     "img": "https://ksp.co.il/shop/items/250638.jpg?v=5",
     "url": "https://ksp.co.il/web/item/250638?af=F15240AX"
   },
@@ -108,6 +123,7 @@
     "uin": 277056,
     "name": "מצלמת אקסטרים GoPro HERO12 Black Creator Edition - שנתיים אחריות יבואן רשמי על ידי רונלייט",
     "price": 1779,
+    "originalPrice": null,
     "img": "https://ksp.co.il/shop/items/277056.jpg?v=5",
     "url": "https://ksp.co.il/web/item/277056?af=F15240AX"
   },
@@ -115,6 +131,7 @@
     "uin": 272356,
     "name": "רמקול חכם Echo Dot (דור 5) Amazon - צבע שחור",
     "price": 189,
+    "originalPrice": null,
     "img": "https://ksp.co.il/shop/items/272356.jpg?v=5",
     "url": "https://ksp.co.il/web/item/272356?af=F15240AX"
   }
