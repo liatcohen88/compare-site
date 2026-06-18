@@ -10,13 +10,23 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 py-10">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           <div>
-            <Image
-              src="/logo.svg"
-              alt={SITE_NAME}
-              width={200}
-              height={60}
-              className="h-12 w-auto mb-3"
-            />
+            <div className="flex items-center gap-2 mb-3">
+              <Image
+                src="/logo-icon.svg"
+                alt=""
+                width={48}
+                height={48}
+                className="w-12 h-12"
+              />
+              <div className="flex flex-col leading-tight">
+                <span className="text-2xl font-extrabold text-slate-900">
+                  Hashveli
+                </span>
+                <span className="text-xs text-slate-500 font-medium">
+                  השוואת מחירים בלחיצה
+                </span>
+              </div>
+            </div>
             <p className="text-sm text-slate-600">
               משווה המחירים המוביל בישראל - השוואה בין KSP, אמזון, אליאקספרס ושיין.
             </p>

@@ -2,13 +2,30 @@ import type { Product } from "./types";
 import { KSP_AFFILIATE_ID } from "./config";
 import { GENERATED_PRODUCTS } from "./generated-products";
 
-const kspLink = (sku: string) => `https://ksp.co.il/item/${KSP_AFFILIATE_ID}/${sku}`;
-const aliLink = (id: string) =>
-  `https://s.click.aliexpress.com/e/_${id}?aff_id=default`;
-const amazonLink = (asin: string) =>
-  `https://www.amazon.com/dp/${asin}?tag=compareil-20`;
-const sheinLink = (id: string) =>
-  `https://shein.com/${id}.html?ref=compareil`;
+// Affiliate link helpers - all use SEARCH URLs to avoid 404s on hardcoded SKUs
+function kspSearch(query: string): string {
+  // KSP affiliate entry URL - sets cookie, then user can browse
+  return `https://ksp.co.il/m_action/api/search?text=${encodeURIComponent(query)}&aff=${KSP_AFFILIATE_ID}`;
+}
+function amazonSearch(query: string): string {
+  // Filter to Amazon Global Store (ships internationally including Israel)
+  return `https://www.amazon.com/s?k=${encodeURIComponent(query)}&i=amazon-global-store&tag=hashveli-20`;
+}
+function aliSearch(query: string): string {
+  // Direct AliExpress search - tracking via cookie when user clicks our affiliate
+  return `https://www.aliexpress.com/wholesale?SearchText=${encodeURIComponent(query)}`;
+}
+function sheinSearch(query: string): string {
+  return `https://us.shein.com/pdsearch/${encodeURIComponent(query)}/`;
+}
+
+const kspLink = (productName: string, _sku?: string) => kspSearch(productName);
+const aliLink = (_id: string, productName?: string) =>
+  aliSearch(productName || _id);
+const amazonLink = (_asin: string, productName?: string) =>
+  amazonSearch(productName || _asin);
+const sheinLink = (_id: string, productName?: string) =>
+  sheinSearch(productName || _id);
 
 const now = "2026-06-07T00:00:00Z";
 
@@ -932,6 +949,18 @@ export const MOCK_PRODUCTS: Product[] = [
     rating: 4.9, reviewCount: 15672, createdAt: now,
   },
 ];
+
+// Auto-fix all URLs in MOCK_PRODUCTS to use search-based affiliate links
+// (using the product title as search query so KSP/Amazon/AliExpress all find it)
+for (const p of MOCK_PRODUCTS) {
+  const q = p.titleEn || p.title;
+  for (const offer of p.offers) {
+    if (offer.vendor === "ksp") offer.url = kspSearch(q);
+    else if (offer.vendor === "amazon") offer.url = amazonSearch(q);
+    else if (offer.vendor === "aliexpress") offer.url = aliSearch(q);
+    else if (offer.vendor === "shein") offer.url = sheinSearch(q);
+  }
+}
 
 // Real products (from AliExpress API) + curated mock products (with KSP/Amazon)
 const ALL_PRODUCTS: Product[] = [...MOCK_PRODUCTS, ...GENERATED_PRODUCTS];
