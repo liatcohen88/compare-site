@@ -53,6 +53,17 @@ const CATEGORY_INFO: Record<string, { emoji: string; gradient: [string, string] 
 
 const DEFAULT = { emoji: "🛍️", gradient: ["#93c5fd", "#1d4ed8"] as [string, string] };
 
+/**
+ * Use images.weserv.nl as a free CDN/proxy.
+ * This bypasses hotlinking restrictions on AliExpress, Amazon, etc.
+ * by fetching server-side and re-serving the image.
+ */
+function proxyImage(src: string): string {
+  // Strip the protocol since weserv expects "domain.com/path"
+  const clean = src.replace(/^https?:\/\//, "");
+  return `https://images.weserv.nl/?url=${encodeURIComponent(clean)}&w=600&h=600&fit=cover&output=webp&q=85`;
+}
+
 function BrandedPlaceholder({
   category,
   brand,
@@ -74,16 +85,11 @@ function BrandedPlaceholder({
       role="img"
       aria-label={brand || "product"}
     >
-      {/* Decorative circles */}
       <div className="absolute -top-8 -right-8 w-32 h-32 bg-white/10 rounded-full" />
       <div className="absolute -bottom-12 -left-12 w-40 h-40 bg-white/10 rounded-full" />
-
-      {/* Main emoji */}
       <span className="text-7xl md:text-8xl drop-shadow-lg relative z-10" aria-hidden="true">
         {info.emoji}
       </span>
-
-      {/* Brand badge */}
       {brand && brand !== "Generic" && (
         <div className="absolute bottom-3 left-1/2 -translate-x-1/2 bg-white/95 text-slate-900 text-xs font-bold px-3 py-1 rounded-full shadow-md">
           {brand}
@@ -106,15 +112,17 @@ export default function ProductImage({
     return <BrandedPlaceholder category={category} brand={brand} className={className} />;
   }
 
+  // Use proxy for all external images for reliability
+  const finalSrc = proxyImage(src);
+
   return (
     /* eslint-disable-next-line @next/next/no-img-element */
     <img
-      src={src}
+      src={finalSrc}
       alt={alt}
       className={className}
       loading="lazy"
       onError={() => setHasError(true)}
-      referrerPolicy="no-referrer"
     />
   );
 }
