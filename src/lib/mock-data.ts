@@ -3,8 +3,8 @@ import { GENERATED_PRODUCTS } from "./generated-products";
 
 // Affiliate link helpers - point to working search URLs on each store
 function kspSearch(query: string): string {
-  // KSP's clean public search URL (the /m_action/api was JSON API → 404)
-  return `https://ksp.co.il/web/search?text=${encodeURIComponent(query)}`;
+  // KSP affiliate landing URL (sets F15240AX tracking cookie + opens search)
+  return `https://ksp.co.il/item/F15240AX?search=${encodeURIComponent(query)}`;
 }
 function amazonSearch(query: string): string {
   // Amazon search with hashveli-20 tag (direct ASIN URLs used where available)
