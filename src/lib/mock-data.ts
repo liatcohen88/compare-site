@@ -950,17 +950,43 @@ export const MOCK_PRODUCTS: Product[] = [
   },
 ];
 
-// Auto-fix all URLs in MOCK_PRODUCTS to use search-based affiliate links
-// (using the product title as search query so KSP/Amazon/AliExpress all find it)
-for (const p of MOCK_PRODUCTS) {
-  const q = p.titleEn || p.title;
-  for (const offer of p.offers) {
-    if (offer.vendor === "ksp") offer.url = kspSearch(q);
-    else if (offer.vendor === "amazon") offer.url = amazonSearch(q);
-    else if (offer.vendor === "aliexpress") offer.url = aliSearch(q);
-    else if (offer.vendor === "shein") offer.url = sheinSearch(q);
+// Auto-fix all URLs in ALL products (MOCK + GENERATED) to use search-based affiliate links
+function fixProductLinks(products: Product[]) {
+  for (const p of products) {
+    const q = p.titleEn || p.title;
+
+    // Fix existing offers
+    for (const offer of p.offers) {
+      if (offer.vendor === "ksp") offer.url = kspSearch(q);
+      else if (offer.vendor === "amazon") offer.url = amazonSearch(q);
+      else if (offer.vendor === "aliexpress") offer.url = aliSearch(q);
+      else if (offer.vendor === "shein") offer.url = sheinSearch(q);
+    }
+
+    // Add SHEIN offer to every product that doesn't have one
+    const hasShein = p.offers.some((o) => o.vendor === "shein");
+    if (!hasShein) {
+      const cheapestPrice = Math.min(
+        ...p.offers.filter((o) => o.inStock).map((o) => o.price + o.shippingPrice),
+      );
+      // Shein is usually 40-60% of cheapest competitor for fashion/beauty
+      const sheinEstimate = Math.round(cheapestPrice * 0.55);
+      p.offers.push({
+        vendor: "shein",
+        price: sheinEstimate,
+        shippingPrice: 25,
+        inStock: true,
+        url: sheinSearch(q),
+        lastUpdated: "2026-06-09T00:00:00Z",
+      });
+    }
   }
 }
+
+fixProductLinks(MOCK_PRODUCTS);
+
+// Also fix generated products + add Shein to them
+fixProductLinks(GENERATED_PRODUCTS);
 
 // Real products (from AliExpress API) + curated mock products (with KSP/Amazon)
 const ALL_PRODUCTS: Product[] = [...MOCK_PRODUCTS, ...GENERATED_PRODUCTS];
