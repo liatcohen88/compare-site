@@ -1,24 +1,25 @@
 import type { Product } from "./types";
-import { KSP_AFFILIATE_ID } from "./config";
 import { GENERATED_PRODUCTS } from "./generated-products";
 
 // Affiliate link helpers - point to working search URLs on each store
 function kspSearch(query: string): string {
-  // KSP's actual public search page (the /m_action/api was JSON API → 404)
-  return `https://ksp.co.il/web/search?text=${encodeURIComponent(query)}&af=${KSP_AFFILIATE_ID}`;
+  // KSP's clean public search URL (the /m_action/api was JSON API → 404)
+  return `https://ksp.co.il/web/search?text=${encodeURIComponent(query)}`;
 }
 function amazonSearch(query: string): string {
-  // Amazon Global Store filter (ships to Israel) - with hashveli-20 tag
-  return `https://www.amazon.com/s?k=${encodeURIComponent(query)}&i=amazon-global-store&tag=hashveli-20`;
+  // Amazon search with hashveli-20 tag (direct ASIN URLs used where available)
+  return `https://www.amazon.com/s?k=${encodeURIComponent(query)}&tag=hashveli-20`;
 }
 function aliSearch(query: string): string {
-  // AliExpress global search - works for any product/keyword
+  // AliExpress global search
   return `https://www.aliexpress.com/w/wholesale-${encodeURIComponent(query.replace(/\s+/g, "-"))}.html`;
 }
 function sheinSearch(query: string): string {
-  // Shein US search (better English support than IL)
-  return `https://us.shein.com/pdsearch/${encodeURIComponent(query.replace(/\s+/g, "%20"))}/?ici=us_tab01navbar03menu01dir01&scici=Search~~EditSearch~~1~~${encodeURIComponent(query)}~~`;
+  return `https://us.shein.com/pdsearch/${encodeURIComponent(query.replace(/\s+/g, "%20"))}/`;
 }
+
+// Brand-name products where AliExpress only sells fakes/accessories - remove AliExpress offer
+const NO_ALIEXPRESS_BRANDS = ["Apple", "Sony", "Bose", "Dyson", "Garmin", "GoPro", "Stanley", "Philips", "Ninja", "Logitech"];
 
 const kspLink = (productName: string, _sku?: string) => kspSearch(productName);
 const aliLink = (_id: string, productName?: string) =>
@@ -1178,8 +1179,21 @@ export const MOCK_PRODUCTS: Product[] = [
 function fixMockProductLinks(products: Product[]) {
   for (const p of products) {
     const q = p.titleEn || p.title;
+
+    // Remove AliExpress offer from brand-name products (only fakes on AliExpress)
+    if (NO_ALIEXPRESS_BRANDS.includes(p.brand)) {
+      p.offers = p.offers.filter((o) => o.vendor !== "aliexpress");
+    }
+    // Also remove Shein from tech/brand products (Shein doesn't sell tech)
+    if (
+      NO_ALIEXPRESS_BRANDS.includes(p.brand) ||
+      ["smartphones", "laptops", "headphones", "smartwatches", "gaming", "smart-home"].includes(p.category)
+    ) {
+      p.offers = p.offers.filter((o) => o.vendor !== "shein");
+    }
+
     for (const offer of p.offers) {
-      // For Amazon - use REAL ASIN if we have it, otherwise search
+      // Amazon: use REAL ASIN direct link if we have it
       if (offer.vendor === "amazon" && offer.vendorSku && /^B0[A-Z0-9]{8}$/.test(offer.vendorSku)) {
         offer.url = `https://www.amazon.com/dp/${offer.vendorSku}?tag=hashveli-20`;
       } else if (offer.vendor === "amazon") {
