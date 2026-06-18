@@ -1176,36 +1176,36 @@ export const MOCK_PRODUCTS: Product[] = [
 
 // Auto-fix MOCK_PRODUCTS URLs to use real search URLs based on English title
 // MOCK_PRODUCTS are curated popular products that exist in multiple stores
+// STRICT: keep only offers with a real product URL. Drop everything else.
+// - Amazon: ASIN must match /^B0[A-Z0-9]{8}$/ → builds /dp/ASIN
+// - AliExpress/KSP/Shein: only kept if offer.url is already a real product URL
+//   (no MOCK_PRODUCT currently has those, so they get dropped)
 function fixMockProductLinks(products: Product[]) {
   for (const p of products) {
-    const q = p.titleEn || p.title;
-
-    // Remove AliExpress offer from brand-name products (only fakes on AliExpress)
-    if (NO_ALIEXPRESS_BRANDS.includes(p.brand)) {
-      p.offers = p.offers.filter((o) => o.vendor !== "aliexpress");
-    }
-    // Also remove Shein from tech/brand products (Shein doesn't sell tech)
-    if (
-      NO_ALIEXPRESS_BRANDS.includes(p.brand) ||
-      ["smartphones", "laptops", "headphones", "smartwatches", "gaming", "smart-home"].includes(p.category)
-    ) {
-      p.offers = p.offers.filter((o) => o.vendor !== "shein");
-    }
-
-    for (const offer of p.offers) {
-      // Amazon: use REAL ASIN direct link if we have it
-      if (offer.vendor === "amazon" && offer.vendorSku && /^B0[A-Z0-9]{8}$/.test(offer.vendorSku)) {
-        offer.url = `https://www.amazon.com/dp/${offer.vendorSku}?tag=hashveli-20`;
-      } else if (offer.vendor === "amazon") {
-        offer.url = amazonSearch(q);
-      } else if (offer.vendor === "ksp") {
-        offer.url = kspSearch(q);
-      } else if (offer.vendor === "aliexpress") {
-        offer.url = aliSearch(q);
-      } else if (offer.vendor === "shein") {
-        offer.url = sheinSearch(q);
+    p.offers = p.offers.filter((offer) => {
+      if (offer.vendor === "amazon") {
+        if (offer.vendorSku && /^B0[A-Z0-9]{8}$/.test(offer.vendorSku)) {
+          offer.url = `https://www.amazon.com/dp/${offer.vendorSku}?tag=hashveli-20`;
+          return true;
+        }
+        return false;
       }
-    }
+      if (offer.vendor === "aliexpress") {
+        return (
+          typeof offer.url === "string" &&
+          (offer.url.includes("s.click.aliexpress.com") ||
+            /aliexpress\.com\/item\/\d+/.test(offer.url))
+        );
+      }
+      if (offer.vendor === "ksp") {
+        return (
+          typeof offer.url === "string" &&
+          /ksp\.co\.il\/(web\/item|item\/[A-Z]?\d)/.test(offer.url)
+        );
+      }
+      // Shein: no real product IDs in MOCK → drop
+      return false;
+    });
   }
 }
 
@@ -1221,8 +1221,24 @@ function aliExpressOnly(products: Product[]) {
 fixMockProductLinks(MOCK_PRODUCTS);
 aliExpressOnly(GENERATED_PRODUCTS);
 
-// Real products (from AliExpress API) + curated mock products (with KSP/Amazon)
-const ALL_PRODUCTS: Product[] = [...MOCK_PRODUCTS, ...GENERATED_PRODUCTS];
+// Skip products auto-image-fetched from AliExpress search (mismatch risk).
+// These titles were Hebrew → English-translated and search results were unreliable.
+const SUSPECT_AUTO_IMAGE_IDS = new Set([
+  "matte-liquid-lipstick-set",
+  "silver-stud-earrings",
+  "led-vanity-mirror",
+  "air-fryer-5l",
+  "baby-monitor-wifi",
+]);
+
+// Keep only products that have at least one real-URL offer (and aren't on the
+// suspect-image blocklist). Better to show fewer items than wrong ones.
+const ALL_PRODUCTS: Product[] = [
+  ...MOCK_PRODUCTS.filter(
+    (p) => p.offers.length > 0 && !SUSPECT_AUTO_IMAGE_IDS.has(p.id),
+  ),
+  ...GENERATED_PRODUCTS.filter((p) => p.offers.length > 0),
+];
 
 export function getProductBySlug(slug: string): Product | undefined {
   return ALL_PRODUCTS.find((p) => p.slug === slug);
