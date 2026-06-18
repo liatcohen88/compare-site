@@ -107,7 +107,8 @@ export default async function ProductPage({ params }: PageProps) {
               alt={product.title}
               category={product.category}
               slug={product.slug}
-              className="max-w-full max-h-96 object-contain"
+              brand={product.brand}
+              className="w-full h-full min-h-[24rem] object-cover rounded-xl"
             />
           </div>
 

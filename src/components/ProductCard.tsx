@@ -35,6 +35,7 @@ export default function ProductCard({ product }: Props) {
           alt={product.title}
           category={product.category}
           slug={product.slug}
+          brand={product.brand}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
         />
         {savingsPercent >= 10 && (
