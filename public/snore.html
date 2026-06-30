@@ -332,6 +332,7 @@
   function playMessage(){
     if(!player.src){ statusEl.textContent = "אין הקלטה — הקליטי הודעה בשלב 1."; return; }
     isPlaying = true;
+    player.loop = false;        // נגן פעם אחת בלבד, בלי חזרות
     player.volume = vol.value/100;
     player.currentTime = 0;
     const p = player.play();
