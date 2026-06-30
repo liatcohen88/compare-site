@@ -4,92 +4,70 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <meta name="theme-color" content="#0b1026" />
-<title>🌙 שומר השינה — מזהה נחירות</title>
+<title>🌙 שומר השינה — מזהה נחירות (AI)</title>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js"></script>
 <style>
   :root {
-    --bg: #0b1026;
-    --bg2: #131a3a;
-    --card: #1a2350;
-    --accent: #6ea8fe;
-    --accent2: #b18cff;
-    --good: #4ade80;
-    --warn: #fbbf24;
-    --text: #eaf0ff;
-    --muted: #95a3d4;
-    --danger: #ff6b8a;
+    --bg: #0b1026; --bg2: #131a3a; --card: #1a2350;
+    --accent: #6ea8fe; --accent2: #b18cff;
+    --good: #4ade80; --warn: #fbbf24; --text: #eaf0ff;
+    --muted: #95a3d4; --danger: #ff6b8a;
   }
   * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-  html, body {
-    margin: 0; padding: 0;
+  html, body { margin:0; padding:0;
     background: radial-gradient(1200px 700px at 50% -10%, #1c2a63 0%, var(--bg) 55%);
-    color: var(--text);
-    font-family: "Segoe UI", "Heebo", system-ui, -apple-system, sans-serif;
-    min-height: 100%;
-  }
-  body { min-height: 100dvh; padding: 18px 16px 40px; }
-  .wrap { max-width: 480px; margin: 0 auto; }
-  h1 { font-size: 26px; margin: 6px 0 2px; text-align: center; }
-  .sub { text-align: center; color: var(--muted); font-size: 14px; margin-bottom: 18px; }
-  .card {
-    background: linear-gradient(180deg, var(--card), var(--bg2));
-    border: 1px solid rgba(110,168,254,0.18);
-    border-radius: 20px;
-    padding: 18px;
-    margin-bottom: 16px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.35);
-  }
-  .card h2 { font-size: 16px; margin: 0 0 12px; color: var(--accent); display:flex; align-items:center; gap:8px; }
-  .step-num {
-    display:inline-flex; width:24px; height:24px; border-radius:50%;
-    background: var(--accent); color:#0b1026; font-weight:700;
-    align-items:center; justify-content:center; font-size:13px;
-  }
-  button {
-    font-family: inherit; font-size: 16px; font-weight: 600;
-    border: none; border-radius: 14px; padding: 14px 18px;
-    cursor: pointer; transition: transform .08s, opacity .2s; width: 100%;
-  }
-  button:active { transform: scale(0.97); }
-  button:disabled { opacity: 0.45; cursor: not-allowed; }
-  .btn-accent { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #0b1026; }
-  .btn-ghost { background: rgba(255,255,255,0.07); color: var(--text); border:1px solid rgba(255,255,255,0.12); }
-  .btn-danger { background: linear-gradient(135deg, #ff6b8a, #ff8a5b); color: #2a0814; }
-  .btn-good { background: linear-gradient(135deg, #4ade80, #22d3ee); color: #04241a; }
-  .row { display: flex; gap: 10px; }
-  .row > * { flex: 1; }
-  label { display:block; font-size: 14px; color: var(--muted); margin: 14px 0 6px; }
-  input[type=range] { width: 100%; accent-color: var(--accent); height: 28px; }
-  .val { color: var(--text); font-weight: 700; }
-  .big {
-    text-align:center; font-size: 64px; font-weight: 800;
-    background: linear-gradient(135deg, var(--accent), var(--accent2));
-    -webkit-background-clip: text; background-clip: text; color: transparent;
-    margin: 4px 0;
-  }
-  .big-label { text-align:center; color: var(--muted); font-size:14px; margin-bottom: 6px; }
-  .meter {
-    height: 16px; border-radius: 10px; background: rgba(255,255,255,0.08);
-    overflow:hidden; margin: 10px 0 4px; position: relative;
-  }
-  .meter-fill { height:100%; width:0%; background: linear-gradient(90deg, var(--good), var(--warn), var(--danger)); transition: width .05s; }
+    color: var(--text); font-family: "Segoe UI","Heebo",system-ui,-apple-system,sans-serif; min-height:100%; }
+  body { min-height:100dvh; padding:18px 16px 40px; }
+  .wrap { max-width:480px; margin:0 auto; }
+  h1 { font-size:26px; margin:6px 0 2px; text-align:center; }
+  .sub { text-align:center; color:var(--muted); font-size:14px; margin-bottom:18px; }
+  .card { background:linear-gradient(180deg,var(--card),var(--bg2));
+    border:1px solid rgba(110,168,254,0.18); border-radius:20px; padding:18px; margin-bottom:16px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.35); }
+  .card h2 { font-size:16px; margin:0 0 12px; color:var(--accent); display:flex; align-items:center; gap:8px; }
+  .step-num { display:inline-flex; width:24px; height:24px; border-radius:50%; background:var(--accent);
+    color:#0b1026; font-weight:700; align-items:center; justify-content:center; font-size:13px; }
+  button { font-family:inherit; font-size:16px; font-weight:600; border:none; border-radius:14px;
+    padding:14px 18px; cursor:pointer; transition:transform .08s,opacity .2s; width:100%; }
+  button:active { transform:scale(0.97); }
+  button:disabled { opacity:0.45; cursor:not-allowed; }
+  .btn-accent { background:linear-gradient(135deg,var(--accent),var(--accent2)); color:#0b1026; }
+  .btn-ghost { background:rgba(255,255,255,0.07); color:var(--text); border:1px solid rgba(255,255,255,0.12); }
+  .btn-danger { background:linear-gradient(135deg,#ff6b8a,#ff8a5b); color:#2a0814; }
+  .btn-good { background:linear-gradient(135deg,#4ade80,#22d3ee); color:#04241a; }
+  .row { display:flex; gap:10px; } .row > * { flex:1; }
+  label { display:block; font-size:14px; color:var(--muted); margin:14px 0 6px; }
+  input[type=range] { width:100%; accent-color:var(--accent); height:28px; }
+  .val { color:var(--text); font-weight:700; }
+  .big { text-align:center; font-size:64px; font-weight:800;
+    background:linear-gradient(135deg,var(--accent),var(--accent2));
+    -webkit-background-clip:text; background-clip:text; color:transparent; margin:4px 0; }
+  .big-label { text-align:center; color:var(--muted); font-size:14px; margin-bottom:6px; }
+  .meter { height:16px; border-radius:10px; background:rgba(255,255,255,0.08); overflow:hidden;
+    margin:10px 0 4px; position:relative; }
+  .meter-fill { height:100%; width:0%; background:linear-gradient(90deg,var(--good),var(--warn),var(--danger)); transition:width .05s; }
   .meter-thresh { position:absolute; top:-4px; bottom:-4px; width:3px; background:#fff; border-radius:2px; opacity:.85; }
-  .status { text-align:center; font-size:15px; margin-top:6px; min-height: 22px; }
-  .dot { display:inline-block; width:10px; height:10px; border-radius:50%; margin-inline-end:6px; vertical-align: middle; }
-  .pulse { animation: pulse 1.4s infinite; }
-  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
-  .hint { font-size: 13px; color: var(--muted); line-height: 1.6; margin-top: 10px; }
-  .hint b { color: var(--text); }
-  audio { width: 100%; margin-top: 10px; }
-  .saved-tag { font-size:13px; color: var(--good); margin-top:8px; display:none; }
-  .footer { text-align:center; color: var(--muted); font-size:12px; margin-top: 20px; line-height:1.7; }
-  .toggle-extra { color: var(--accent); text-decoration: underline; cursor: pointer; font-size: 13px; }
+  .status { text-align:center; font-size:15px; margin-top:6px; min-height:22px; }
+  .conf { text-align:center; font-size:15px; margin-top:8px; min-height:22px; font-weight:600; }
+  .dot { display:inline-block; width:10px; height:10px; border-radius:50%; margin-inline-end:6px; vertical-align:middle; }
+  .pulse { animation:pulse 1.4s infinite; } @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+  .hint { font-size:13px; color:var(--muted); line-height:1.6; margin-top:10px; }
+  .hint b { color:var(--text); }
+  audio { width:100%; margin-top:10px; }
+  .saved-tag { font-size:13px; color:var(--good); margin-top:8px; display:none; }
+  .footer { text-align:center; color:var(--muted); font-size:12px; margin-top:20px; line-height:1.7; }
+  .toggle-extra { color:var(--accent); text-decoration:underline; cursor:pointer; font-size:13px; }
   .extra { display:none; }
+  .seg { display:flex; gap:8px; background:rgba(255,255,255,0.06); padding:5px; border-radius:14px; }
+  .seg button { background:transparent; color:var(--muted); padding:10px; font-size:14px; }
+  .seg button.on { background:linear-gradient(135deg,var(--accent),var(--accent2)); color:#0b1026; }
+  .engine-note { font-size:13px; color:var(--muted); margin-top:8px; min-height:20px; }
 </style>
 </head>
 <body>
 <div class="wrap">
   <h1>🌙 שומר השינה</h1>
-  <div class="sub">כשהוא נוחר — הוא ישמע אותך 😴</div>
+  <div class="sub">זיהוי נחירות חכם (AI) — כשהוא נוחר, הוא ישמע אותך 😴</div>
 
   <!-- STEP 1: record -->
   <div class="card">
@@ -101,19 +79,27 @@
     <div id="recState" class="status" style="margin-top:10px"></div>
     <audio id="preview" controls style="display:none"></audio>
     <div id="savedTag" class="saved-tag">✓ ההקלטה נשמרה במכשיר</div>
-    <div class="hint">לחצי <b>הקלטה</b>, אמרי משהו כמו "הראל, שכב על הצד" — ולחצי <b>עצירה</b>. ההקלטה נשמרת בטלפון הזה בלבד.</div>
+    <div class="hint">לחצי <b>הקלטה</b>, אמרי "הראל, שכב על הצד" — ולחצי <b>עצירה</b>. נשמר בטלפון הזה בלבד.</div>
   </div>
 
   <!-- STEP 2: settings -->
   <div class="card">
     <h2><span class="step-num">2</span> כיוונון</h2>
+
+    <label>מנוע זיהוי</label>
+    <div class="seg" id="engineSeg">
+      <button data-engine="ai" class="on">🤖 חכם (AI)</button>
+      <button data-engine="simple">🔊 פשוט</button>
+    </div>
+    <div class="engine-note" id="engineNote"></div>
+
     <label>רגישות (כמה קל לזהות נחירה) — <span class="val" id="sensVal"></span></label>
-    <input type="range" id="sens" min="5" max="80" value="32" />
-    <div class="hint">גבוה מדי = יתעורר מכל רעש. נמוך מדי = יפספס נחירות. התחילי באמצע וכווני.</div>
+    <input type="range" id="sens" min="5" max="85" value="60" />
+    <div class="hint">גבוה = מזהה בקלות (אבל אולי גם רעשים). נמוך = רק נחירה ברורה. התחילי באמצע.</div>
 
     <label>השהיה בין הפעלות — <span class="val" id="cooldownVal"></span></label>
     <input type="range" id="cooldown" min="10" max="300" step="5" value="90" />
-    <div class="hint">כדי שלא ינגן שוב ושוב ברצף. 90 שניות זה התחלה טובה.</div>
+    <div class="hint">כדי שלא ינגן שוב ושוב ברצף.</div>
 
     <label>עוצמת ניגון — <span class="val" id="volVal"></span></label>
     <input type="range" id="vol" min="10" max="100" value="70" />
@@ -126,29 +112,29 @@
     <div class="big" id="count">0</div>
 
     <div class="meter"><div class="meter-fill" id="meterFill"></div><div class="meter-thresh" id="meterThresh"></div></div>
-    <div class="big-label" style="margin-bottom:14px">עוצמת הקול כרגע</div>
+    <div class="big-label" style="margin-bottom:4px">עוצמת הקול כרגע</div>
+    <div class="conf" id="conf"></div>
 
-    <button id="startBtn" class="btn-good">▶ התחל מעקב</button>
+    <button id="startBtn" class="btn-good" style="margin-top:8px">▶ התחל מעקב</button>
     <button id="stopBtn" class="btn-ghost" style="display:none">⏹ עצור מעקב</button>
     <div id="status" class="status"></div>
 
     <button id="testBtn" class="btn-ghost" style="margin-top:10px">🔊 בדיקת ניגון ההודעה</button>
 
     <div class="hint" style="margin-top:14px">
-      <b>חשוב:</b> השאירי את הדף פתוח והטלפון בטעינה ליד המיטה. אנסה לשמור שהמסך לא ייכבה,
-      אבל אם הוא נכבה — הגדירי בטלפון שלא יינעל אוטומטית בלילה.
+      <b>חשוב:</b> השאירי את הדף פתוח והטלפון בטעינה ליד המיטה. במצב AI כדאי אינטרנט (המודל נטען פעם אחת).
     </div>
     <div style="margin-top:10px"><span class="toggle-extra" id="advToggle">הגדרות מתקדמות ▾</span></div>
     <div class="extra" id="adv">
-      <label>זמן מינימלי לנחירה (מילישניות) — <span class="val" id="minDurVal"></span></label>
+      <label>זמן מינימלי לנחירה במצב פשוט (מ"ש) — <span class="val" id="minDurVal"></span></label>
       <input type="range" id="minDur" min="120" max="1500" step="20" value="300" />
-      <div class="hint">כמה זמן הקול צריך להישאר חזק כדי להיחשב נחירה (ולא רעש פתאומי).</div>
+      <div class="hint">רלוונטי רק למנוע הפשוט: כמה זמן הקול צריך להישאר חזק כדי להיחשב נחירה.</div>
     </div>
   </div>
 
   <div class="footer">
     הכל רץ בטלפון שלך — שום הקלטה לא נשלחת לאף מקום.<br/>
-    בנוי באהבה כדי שתישני טוב 💙
+    מנוע ה‑AI: YAMNet (Google) דרך TensorFlow.js · בנוי באהבה 💙
   </div>
 </div>
 
@@ -159,6 +145,11 @@
   "use strict";
   const $ = id => document.getElementById(id);
   const LS_KEY = "snore_msg_audio_v1";
+  const SR = 16000;          // YAMNet expects 16kHz mono
+  const FRAME = 15600;       // ~0.975s — minimal YAMNet window
+  const SNORE_IDX = 38;      // "Snoring" class in YAMNet/AudioSet
+  // נשקלל גם מחלקות קרובות עם משקל נמוך, אבל נחירה היא העיקר
+  const RELATED = { 38:1.0 /*Snoring*/, 41:0.5 /*Snort*/, 37:0.4 /*Wheeze*/ };
 
   // ---------- elements ----------
   const recBtn=$("recBtn"), recStopBtn=$("recStopBtn"), recState=$("recState"),
@@ -168,9 +159,12 @@
         vol=$("vol"), volVal=$("volVal"),
         minDur=$("minDur"), minDurVal=$("minDurVal"),
         count=$("count"), meterFill=$("meterFill"), meterThresh=$("meterThresh"),
-        startBtn=$("startBtn"), stopBtn=$("stopBtn"), statusEl=$("status"),
+        startBtn=$("startBtn"), stopBtn=$("stopBtn"), statusEl=$("status"), confEl=$("conf"),
         testBtn=$("testBtn"), player=$("player"),
-        advToggle=$("advToggle"), adv=$("adv");
+        advToggle=$("advToggle"), adv=$("adv"),
+        engineSeg=$("engineSeg"), engineNote=$("engineNote");
+
+  let engine = "ai"; // "ai" | "simple"
 
   // ---------- settings UI ----------
   function refreshLabels(){
@@ -178,27 +172,39 @@
     cooldownVal.textContent = cooldown.value + " שניות";
     volVal.textContent = vol.value + "%";
     minDurVal.textContent = minDur.value + " מ\"ש";
-    meterThresh.style.right = (sens.value) + "%";
+    meterThresh.style.right = (90 - sens.value) + "%";
     player.volume = vol.value/100;
   }
   ["input","change"].forEach(ev=>{
     [sens,cooldown,vol,minDur].forEach(el=>el.addEventListener(ev, refreshLabels));
   });
   advToggle.addEventListener("click", ()=>{
-    const open = adv.style.display === "block";
-    adv.style.display = open ? "none" : "block";
-    advToggle.textContent = open ? "הגדרות מתקדמות ▾" : "הגדרות מתקדמות ▴";
+    const open = adv.style.display==="block";
+    adv.style.display = open ? "none":"block";
+    advToggle.textContent = open ? "הגדרות מתקדמות ▾":"הגדרות מתקדמות ▴";
   });
-  refreshLabels();
 
-  // ---------- load saved message ----------
+  engineSeg.addEventListener("click", e=>{
+    const b = e.target.closest("button[data-engine]"); if(!b) return;
+    engine = b.dataset.engine;
+    [...engineSeg.children].forEach(c=>c.classList.toggle("on", c===b));
+    updateEngineNote();
+    if(engine==="ai") ensureModel(); // התחל לטעון מראש
+  });
+  function updateEngineNote(){
+    if(engine==="ai"){
+      engineNote.textContent = modelReady ? "✓ מודל ה‑AI מוכן — מבדיל נחירה מרעש."
+        : (modelLoading ? "טוען מודל AI..." : "מזהה נחירה אמיתית ומבדיל מדיבור/מאוורר. דורש אינטרנט בטעינה הראשונה.");
+    } else {
+      engineNote.textContent = "מנוע פשוט לפי עוצמת קול — עובד גם בלי אינטרנט.";
+    }
+  }
+  refreshLabels(); updateEngineNote();
+
+  // ---------- saved message ----------
   function loadSaved(){
     const data = localStorage.getItem(LS_KEY);
-    if(data){
-      preview.src = data; preview.style.display = "block";
-      player.src = data;
-      savedTag.style.display = "block";
-    }
+    if(data){ preview.src=data; preview.style.display="block"; player.src=data; savedTag.style.display="block"; }
   }
   loadSaved();
 
@@ -207,149 +213,188 @@
   recBtn.addEventListener("click", async ()=>{
     try{
       recStream = await navigator.mediaDevices.getUserMedia({audio:true});
-      chunks = [];
-      mediaRecorder = new MediaRecorder(recStream);
-      mediaRecorder.ondataavailable = e => { if(e.data.size>0) chunks.push(e.data); };
+      chunks=[]; mediaRecorder=new MediaRecorder(recStream);
+      mediaRecorder.ondataavailable = e=>{ if(e.data.size>0) chunks.push(e.data); };
       mediaRecorder.onstop = saveRecording;
       mediaRecorder.start();
-      recBtn.disabled = true; recStopBtn.disabled = false;
-      recState.innerHTML = '<span class="dot pulse" style="background:var(--danger)"></span> מקליט...';
-    }catch(err){
-      recState.textContent = "אין גישה למיקרופון: " + err.message;
-    }
+      recBtn.disabled=true; recStopBtn.disabled=false;
+      recState.innerHTML='<span class="dot pulse" style="background:var(--danger)"></span> מקליט...';
+    }catch(err){ recState.textContent="אין גישה למיקרופון: "+err.message; }
   });
   recStopBtn.addEventListener("click", ()=>{
     if(mediaRecorder && mediaRecorder.state!=="inactive") mediaRecorder.stop();
     if(recStream) recStream.getTracks().forEach(t=>t.stop());
-    recBtn.disabled=false; recStopBtn.disabled=true;
-    recState.textContent = "שומר...";
+    recBtn.disabled=false; recStopBtn.disabled=true; recState.textContent="שומר...";
   });
   function saveRecording(){
-    const blob = new Blob(chunks, {type: mediaRecorder.mimeType || "audio/webm"});
-    const reader = new FileReader();
-    reader.onload = ()=>{
-      try{
-        localStorage.setItem(LS_KEY, reader.result);
-        loadSaved();
-        recState.textContent = "✓ נשמר!";
-      }catch(e){
-        // too large for localStorage — still use it for this session
-        preview.src = reader.result; preview.style.display="block";
-        player.src = reader.result;
-        recState.textContent = "ההקלטה ארוכה מדי לשמירה קבועה, אבל תעבוד עכשיו. נסי הקלטה קצרה יותר.";
-      }
+    const blob=new Blob(chunks,{type:mediaRecorder.mimeType||"audio/webm"});
+    const reader=new FileReader();
+    reader.onload=()=>{
+      try{ localStorage.setItem(LS_KEY,reader.result); loadSaved(); recState.textContent="✓ נשמר!"; }
+      catch(e){ preview.src=reader.result; preview.style.display="block"; player.src=reader.result;
+        recState.textContent="ההקלטה ארוכה מדי לשמירה קבועה אך תעבוד עכשיו. נסי קצרה יותר."; }
     };
     reader.readAsDataURL(blob);
   }
 
   // ---------- wake lock ----------
   let wakeLock=null;
-  async function requestWakeLock(){
-    try{ if("wakeLock" in navigator){ wakeLock = await navigator.wakeLock.request("screen"); } }catch(e){}
+  async function requestWakeLock(){ try{ if("wakeLock" in navigator) wakeLock=await navigator.wakeLock.request("screen"); }catch(e){} }
+  document.addEventListener("visibilitychange", ()=>{ if(running && document.visibilityState==="visible") requestWakeLock(); });
+
+  // ---------- AI model ----------
+  let model=null, modelReady=false, modelLoading=false;
+  const MODEL_URLS = [
+    {url:"https://tfhub.dev/google/tfjs-model/yamnet/tfjs/1", opts:{fromTFHub:true}},
+    {url:"https://www.kaggle.com/models/google/yamnet/TfJs/tfjs/1", opts:{fromTFHub:true}},
+    {url:"https://storage.googleapis.com/tfhub-tfjs-modules/google/yamnet/tfjs/1/model.json", opts:{}}
+  ];
+  async function ensureModel(){
+    if(modelReady || modelLoading || typeof tf==="undefined") { updateEngineNote(); return modelReady; }
+    modelLoading=true; updateEngineNote();
+    for(const m of MODEL_URLS){
+      try{
+        model = await tf.loadGraphModel(m.url, m.opts);
+        // חימום
+        tf.tidy(()=>{ const w=tf.zeros([FRAME]); const o=model.predict(w);
+          (Array.isArray(o)?o:[o]).forEach(t=>t.dispose && t.dispose()); });
+        modelReady=true; modelLoading=false; updateEngineNote(); return true;
+      }catch(err){ /* try next */ }
+    }
+    modelLoading=false; updateEngineNote();
+    return false;
   }
-  document.addEventListener("visibilitychange", ()=>{
-    if(running && document.visibilityState==="visible") requestWakeLock();
-  });
+  // טעינה מראש כשהדף נפתח (ברירת מחדל AI)
+  window.addEventListener("load", ()=>{ if(engine==="ai") ensureModel(); });
 
   // ---------- detection ----------
-  let audioCtx=null, analyser=null, micStream=null, rafId=null, running=false;
-  let dataArr=null;
-  let loudSince=0, lastPlay=0, snoreCount=0, isPlaying=false;
-
+  let audioCtx=null, micStream=null, processor=null, srcNode=null, silentGain=null;
+  let running=false, inferring=false;
+  let sampleChunks=[], bufLen=0, lastLevel=0;
+  let loudSince=0, lastPlay=0, lastCount=0, snoreCount=0, isPlaying=false;
   function nowMs(){ return performance.now(); }
 
   async function start(){
-    try{
-      micStream = await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:false, noiseSuppression:false, autoGainControl:false}});
-    }catch(err){
-      statusEl.textContent = "אין גישה למיקרופון: " + err.message; return;
+    if(!player.src){ statusEl.textContent="קודם הקליטי הודעה בשלב 1 🙂"; return; }
+    if(engine==="ai"){
+      statusEl.textContent="טוען מודל AI...";
+      const ok = await ensureModel();
+      if(!ok){
+        engine="simple";
+        [...engineSeg.children].forEach(c=>c.classList.toggle("on", c.dataset.engine==="simple"));
+        updateEngineNote();
+        statusEl.textContent="לא הצלחתי לטעון את ה‑AI (אין אינטרנט?) — עברתי למנוע הפשוט.";
+      }
     }
-    audioCtx = new (window.AudioContext||window.webkitAudioContext)();
-    if(audioCtx.state==="suspended") await audioCtx.resume();
-    const src = audioCtx.createMediaStreamSource(micStream);
-    analyser = audioCtx.createAnalyser();
-    analyser.fftSize = 1024;
-    dataArr = new Uint8Array(analyser.fftSize);
-    src.connect(analyser);
+    try{
+      micStream = await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:false,noiseSuppression:false,autoGainControl:false}});
+    }catch(err){ statusEl.textContent="אין גישה למיקרופון: "+err.message; return; }
 
-    running = true; snoreCount = 0; lastPlay = 0; loudSince = 0;
-    count.textContent = "0";
+    audioCtx = new (window.AudioContext||window.webkitAudioContext)({sampleRate:SR});
+    if(audioCtx.state==="suspended") await audioCtx.resume();
+    srcNode = audioCtx.createMediaStreamSource(micStream);
+    processor = audioCtx.createScriptProcessor(4096,1,1);
+    silentGain = audioCtx.createGain(); silentGain.gain.value=0; // לא להחזיר את המיקרופון לרמקול
+    srcNode.connect(processor); processor.connect(silentGain); silentGain.connect(audioCtx.destination);
+    processor.onaudioprocess = onAudio;
+
+    running=true; inferring=false; sampleChunks=[]; bufLen=0;
+    snoreCount=0; lastPlay=0; lastCount=0; loudSince=0;
+    count.textContent="0"; confEl.textContent="";
     startBtn.style.display="none"; stopBtn.style.display="block";
-    statusEl.innerHTML = '<span class="dot pulse" style="background:var(--good)"></span> מקשיב לנחירות...';
+    statusEl.innerHTML='<span class="dot pulse" style="background:var(--good)"></span> '
+      + (engine==="ai" ? "מקשיב (AI)..." : "מקשיב...");
     requestWakeLock();
-    loop();
   }
 
   function stop(){
     running=false;
-    if(rafId) cancelAnimationFrame(rafId);
+    try{ if(processor){ processor.disconnect(); processor.onaudioprocess=null; } }catch(e){}
+    try{ if(srcNode) srcNode.disconnect(); }catch(e){}
+    try{ if(silentGain) silentGain.disconnect(); }catch(e){}
     if(micStream) micStream.getTracks().forEach(t=>t.stop());
     if(audioCtx) audioCtx.close().catch(()=>{});
     if(wakeLock){ wakeLock.release().catch(()=>{}); wakeLock=null; }
-    meterFill.style.width="0%";
+    meterFill.style.width="0%"; confEl.textContent="";
     startBtn.style.display="block"; stopBtn.style.display="none";
-    statusEl.textContent = "המעקב הופסק. סה\"כ נחירות: " + snoreCount;
+    statusEl.textContent="המעקב הופסק. סה\"כ נחירות: "+snoreCount;
   }
 
-  function loop(){
+  function onAudio(e){
     if(!running) return;
-    analyser.getByteTimeDomainData(dataArr);
-    // RMS volume 0..~1
-    let sum=0;
-    for(let i=0;i<dataArr.length;i++){ const v=(dataArr[i]-128)/128; sum += v*v; }
-    const rms = Math.sqrt(sum/dataArr.length);
-    const level = Math.min(100, rms*100*2.2); // scaled to 0..100-ish
-    meterFill.style.width = level.toFixed(0)+"%";
+    const ch = e.inputBuffer.getChannelData(0);
+    // עוצמה חיה למד
+    let s=0; for(let i=0;i<ch.length;i++) s+=ch[i]*ch[i];
+    const rms=Math.sqrt(s/ch.length);
+    lastLevel=Math.min(100, rms*220);
+    meterFill.style.width=lastLevel.toFixed(0)+"%";
 
-    const thresh = parseInt(sens.value,10);
-    const minDuration = parseInt(minDur.value,10);
-    const cd = parseInt(cooldown.value,10)*1000;
-    const t = nowMs();
+    if(engine==="simple"){ detectSimple(); return; }
 
-    if(!isPlaying && level >= thresh){
-      if(loudSince===0) loudSince = t;
-      if(t - loudSince >= minDuration){
-        // sustained loud sound => snore
-        onSnore(t, cd);
-        loudSince = 0; // reset so we need a new sustained burst
-      }
-    } else {
-      loudSince = 0;
-    }
-
-    rafId = requestAnimationFrame(loop);
+    // AI: צבור חלון של ~1ש ואז סווג
+    sampleChunks.push(new Float32Array(ch)); bufLen+=ch.length;
+    if(bufLen>=FRAME && !inferring && modelReady) runInference();
   }
 
-  function onSnore(t, cd){
-    snoreCount++;
-    count.textContent = snoreCount;
-    if(t - lastPlay >= cd){
-      lastPlay = t;
-      playMessage();
-    }
+  function assembleFrame(){
+    const buf=new Float32Array(bufLen); let off=0;
+    for(const c of sampleChunks){ buf.set(c,off); off+=c.length; }
+    sampleChunks=[]; bufLen=0;
+    return buf.length>FRAME ? buf.subarray(buf.length-FRAME) : buf;
+  }
+
+  async function runInference(){
+    inferring=true;
+    const frame=assembleFrame();
+    let prob=0;
+    try{
+      const scoreData = tf.tidy(()=>{
+        const w=tf.tensor1d(frame);
+        const out=model.predict(w);
+        const scores=Array.isArray(out)?out[0]:out; // [frames,521]
+        return scores.max(0).arraySync();           // מקסימום לאורך הזמן לכל מחלקה
+      });
+      let best=0;
+      for(const idx in RELATED){ best=Math.max(best, scoreData[idx]*RELATED[idx]); }
+      prob=best;
+    }catch(err){ /* התעלם מפריים בעייתי */ }
+    inferring=false;
+
+    const thr=(90-parseInt(sens.value,10))/100; // רגישות גבוהה => סף נמוך
+    confEl.innerHTML = "🤖 ודאות נחירה: <span class='val'>"+Math.round(prob*100)+"%</span>";
+    if(prob>=thr) registerSnore();
+  }
+
+  function detectSimple(){
+    const thr=(90-parseInt(sens.value,10));       // על סקלת 0..100 של העוצמה
+    const minDuration=parseInt(minDur.value,10);
+    const t=nowMs();
+    if(!isPlaying && lastLevel>=thr){
+      if(loudSince===0) loudSince=t;
+      if(t-loudSince>=minDuration){ registerSnore(); loudSince=0; }
+    } else loudSince=0;
+  }
+
+  function registerSnore(){
+    const t=nowMs();
+    if(t-lastCount>3000){ snoreCount++; count.textContent=snoreCount; lastCount=t; }
+    const cd=parseInt(cooldown.value,10)*1000;
+    if(!isPlaying && t-lastPlay>=cd){ lastPlay=t; playMessage(); }
   }
 
   function playMessage(){
-    if(!player.src){ statusEl.textContent = "אין הקלטה — הקליטי הודעה בשלב 1."; return; }
-    isPlaying = true;
-    player.loop = false;        // נגן פעם אחת בלבד, בלי חזרות
-    player.volume = vol.value/100;
-    player.currentTime = 0;
-    const p = player.play();
-    if(p && p.catch) p.catch(()=>{});
+    if(!player.src){ statusEl.textContent="אין הקלטה — הקליטי הודעה בשלב 1."; return; }
+    isPlaying=true; player.loop=false; player.volume=vol.value/100; player.currentTime=0;
+    const p=player.play(); if(p&&p.catch) p.catch(()=>{});
   }
-  player.addEventListener("ended", ()=>{
-    // small grace so the speaker echo doesn't instantly retrigger
-    setTimeout(()=>{ isPlaying=false; loudSince=0; }, 600);
-  });
+  player.addEventListener("ended", ()=>{ setTimeout(()=>{ isPlaying=false; loudSince=0; }, 600); });
 
   startBtn.addEventListener("click", start);
   stopBtn.addEventListener("click", stop);
   testBtn.addEventListener("click", ()=>{
     if(!player.src){ alert("קודם הקליטי הודעה בשלב 1 🙂"); return; }
-    player.volume = vol.value/100; player.currentTime=0; player.play();
+    player.loop=false; player.volume=vol.value/100; player.currentTime=0; player.play();
   });
-
 })();
 </script>
 </body>
