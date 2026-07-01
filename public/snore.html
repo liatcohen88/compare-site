@@ -273,10 +273,26 @@
   let running=false, inferring=false;
   let sampleChunks=[], bufLen=0, lastLevel=0;
   let loudSince=0, lastPlay=0, lastCount=0, snoreCount=0, isPlaying=false;
+  let audioUnlocked=false;
   function nowMs(){ return performance.now(); }
+
+  // שחרור ניגון אוטומטי: דפדפני נייד חוסמים play() שלא מגיע מלחיצת אצבע.
+  // מנגנים בהשתקה פעם אחת בזמן הלחיצה על "התחל מעקב" כדי לפתוח את החסימה.
+  function unlockAudio(){
+    if(audioUnlocked || !player.src) return;
+    try{
+      player.muted=true;
+      const p=player.play();
+      if(p && p.then){
+        p.then(()=>{ player.pause(); player.currentTime=0; player.muted=false; audioUnlocked=true; })
+         .catch(()=>{ player.muted=false; });
+      } else { player.pause(); player.currentTime=0; player.muted=false; audioUnlocked=true; }
+    }catch(e){ player.muted=false; }
+  }
 
   async function start(){
     if(!player.src){ statusEl.textContent="קודם הקליטי הודעה בשלב 1 🙂"; return; }
+    unlockAudio(); // חייב לרוץ בזמן לחיצת האצבע כדי לאפשר ניגון אוטומטי בהמשך
     if(engine==="ai"){
       statusEl.textContent="טוען מודל AI...";
       const ok = await ensureModel();
@@ -330,11 +346,14 @@
     lastLevel=Math.min(100, rms*220);
     meterFill.style.width=lastLevel.toFixed(0)+"%";
 
-    if(engine==="simple"){ detectSimple(); return; }
+    // זיהוי לפי עוצמה רץ תמיד — רשת ביטחון אמינה שתמיד עובדת
+    detectSimple();
 
-    // AI: צבור חלון של ~1ש ואז סווג
-    sampleChunks.push(new Float32Array(ch)); bufLen+=ch.length;
-    if(bufLen>=FRAME && !inferring && modelReady) runInference();
+    // במצב AI מוסיפים זיהוי חכם (אם המודל נטען) לרגישות טובה יותר
+    if(engine==="ai" && modelReady){
+      sampleChunks.push(new Float32Array(ch)); bufLen+=ch.length;
+      if(bufLen>=FRAME && !inferring) runInference();
+    }
   }
 
   function assembleFrame(){
@@ -386,9 +405,20 @@
   function playMessage(){
     if(!player.src){ statusEl.textContent="אין הקלטה — הקליטי הודעה בשלב 1."; return; }
     isPlaying=true; player.loop=false; player.volume=vol.value/100; player.currentTime=0;
-    const p=player.play(); if(p&&p.catch) p.catch(()=>{});
+    statusEl.innerHTML='<span class="dot" style="background:var(--danger)"></span> 🔔 זוהתה נחירה — מנגן את ההודעה!';
+    const p=player.play();
+    if(p&&p.catch) p.catch(()=>{
+      // אם הדפדפן עדיין חוסם ניגון — נודיע במקום להיכשל בשקט
+      statusEl.textContent="🔔 זוהתה נחירה! (הדפדפן חסם ניגון — פתחי מחדש ולחצי 'התחל מעקב')";
+      isPlaying=false;
+    });
   }
-  player.addEventListener("ended", ()=>{ setTimeout(()=>{ isPlaying=false; loudSince=0; }, 600); });
+  function backToListening(){
+    if(!running) return;
+    statusEl.innerHTML='<span class="dot pulse" style="background:var(--good)"></span> '
+      + (engine==="ai" ? "מקשיב (AI)..." : "מקשיב...");
+  }
+  player.addEventListener("ended", ()=>{ setTimeout(()=>{ isPlaying=false; loudSince=0; backToListening(); }, 600); });
 
   startBtn.addEventListener("click", start);
   stopBtn.addEventListener("click", stop);
