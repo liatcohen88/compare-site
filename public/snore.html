@@ -165,6 +165,8 @@
         engineSeg=$("engineSeg"), engineNote=$("engineNote");
 
   let engine = "ai"; // "ai" | "simple"
+  // AI model state — declared early so updateEngineNote() can read it safely
+  let model=null, modelReady=false, modelLoading=false;
 
   // ---------- settings UI ----------
   function refreshLabels(){
@@ -243,7 +245,6 @@
   document.addEventListener("visibilitychange", ()=>{ if(running && document.visibilityState==="visible") requestWakeLock(); });
 
   // ---------- AI model ----------
-  let model=null, modelReady=false, modelLoading=false;
   const MODEL_URLS = [
     {url:"https://tfhub.dev/google/tfjs-model/yamnet/tfjs/1", opts:{fromTFHub:true}},
     {url:"https://www.kaggle.com/models/google/yamnet/TfJs/tfjs/1", opts:{fromTFHub:true}},
